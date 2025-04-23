@@ -76,7 +76,7 @@ export default function Header() {
   });
 
   return (
-    <header className="bg-white p-3 rounded-xl w-[95%] mx-auto m-4 flex justify-between items-center !min-h-16 !max-h-16">
+    <header className="bg-white p-3 rounded-xl w-[95%] mx-auto m-4 flex justify-between items-center !min-h-16 !max-h-16 relative z-10">
       <Link href="/">
         <Image src="/images/logo.svg" alt="logo" width={100} height={100} />
       </Link>

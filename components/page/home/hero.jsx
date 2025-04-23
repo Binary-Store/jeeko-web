@@ -14,6 +14,10 @@ import {
 } from "@/components/ui/carousel";
 import { Users } from "lucide-react";
 import { useRef } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TextPlugin } from "gsap/TextPlugin";
+
+gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 const productCategories = [
   {
@@ -32,6 +36,8 @@ const productCategories = [
 
 export default function Hero() {
   const containerRef = useRef();
+  const customerCountRef = useRef();
+  const yearsRef = useRef();
 
   useGSAP(
     () => {
@@ -44,6 +50,32 @@ export default function Hero() {
           stagger: 0.2,
         }
       );
+
+      // Counter animation for customer count
+      gsap.to(customerCountRef.current, {
+        duration: 2,
+        delay: 0.5,
+        textContent: "100+",
+        snap: { textContent: 1 },
+        ease: "power1.inOut",
+        onUpdate: function () {
+          const value = Math.ceil(parseFloat(this.targets()[0].textContent));
+          this.targets()[0].textContent = value + "+";
+        },
+      });
+
+      // Counter animation for years of experience
+      gsap.to(yearsRef.current, {
+        duration: 2,
+        delay: 0.5,
+        textContent: "3+",
+        snap: { textContent: 1 },
+        ease: "power1.inOut",
+        onUpdate: function () {
+          const value = Math.ceil(parseFloat(this.targets()[0].textContent));
+          this.targets()[0].textContent = value + "+";
+        },
+      });
     },
     { scope: containerRef }
   );
@@ -134,14 +166,18 @@ export default function Hero() {
         />
       </div>
       <div className="customer-count flex flex-col py-7 gap-5 items-center justify-center bg-white rounded-xl">
-        <h2 className="text-primary font-bold text-4xl">100+</h2>
+        <h2 ref={customerCountRef} className="text-primary font-bold text-4xl">
+          0+
+        </h2>
         <div className="font-bold flex items-center gap-2">
           <Users className="size-5" />
           <p>Happy Customers</p>
         </div>
       </div>
       <div className="flex flex-col py-7 gap-5 items-center justify-center bg-white rounded-xl years-of-experience">
-        <h2 className="text-primary font-bold text-4xl">3+</h2>
+        <h2 ref={yearsRef} className="text-primary font-bold text-4xl">
+          0+
+        </h2>
         <div className="font-bold flex items-center gap-2">
           <p>Years of Experience</p>
         </div>

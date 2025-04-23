@@ -1,15 +1,72 @@
+"use client";
+
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Brands() {
+  const containerRef = useRef();
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        "h2",
+        {
+          y: 50,
+          opacity: 0,
+        },
+        {
+          scrollTrigger: {
+            trigger: "h2",
+            start: "top 90%",
+            end: "200px 90%",
+            toggleActions: "play none none reverse",
+          },
+          y: 0,
+          opacity: 1,
+          duration: 2,
+        }
+      );
+
+      gsap.fromTo(
+        ".brand-card",
+        {
+          y: 100,
+          opacity: 0,
+          rotate: 10,
+        },
+        {
+          scrollTrigger: {
+            trigger: ".brand-card",
+            start: "top 95%",
+            end: "bottom 95%",
+            toggleActions: "play none none reverse",
+            scrub: 1,
+          },
+          y: 0,
+          opacity: 1,
+          rotate: 0,
+          duration: 1,
+          stagger: 0.2,
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section className="w-full mx-auto my-10">
+    <section ref={containerRef} className="w-full mx-auto my-10">
       <h2 className="text-4xl text-center font-bold">Our Brands</h2>
       <div className="w-32 h-1 bg-primary mx-auto my-2"></div>
 
       <div className="w-[95%] mx-auto flex gap-4 my-7">
-        <div className="w-full bg-white rounded-xl p-5">
+        <div className="w-full bg-white rounded-xl p-5 brand-card">
           <div className="w-full flex items-center gap-4">
             <Image
               src="/images/logo.svg"
@@ -50,7 +107,7 @@ export default function Brands() {
           </div>
         </div>
 
-        <div className="w-full bg-white rounded-xl p-5">
+        <div className="w-full bg-white rounded-xl p-5 brand-card">
           <div className="w-full flex items-center gap-4">
             <Image
               src="/images/kk-logo.png"

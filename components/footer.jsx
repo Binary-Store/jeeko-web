@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ClipboardCheck,
   Search,
@@ -16,8 +20,9 @@ import {
   FacebookIcon,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-
 import { Button } from "@/components/ui/button";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const productCategories = [
   {
@@ -38,16 +43,63 @@ const productCategories = [
 ];
 
 export default function Footer() {
+  const containerRef = useRef();
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ".footer-logo",
+        {
+          y: 50,
+          opacity: 0,
+        },
+        {
+          scrollTrigger: {
+            trigger: ".footer-logo",
+            start: "top 90%",
+            end: "-200px 90%",
+            toggleActions: "play none none reverse",
+          },
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+        }
+      );
+
+      gsap.fromTo(
+        ".footer-section",
+        {
+          y: 50,
+          opacity: 0,
+        },
+        {
+          scrollTrigger: {
+            trigger: ".footer-section",
+            start: "top 95%",
+            end: "bottom 95%",
+            toggleActions: "play none none reverse",
+            scrub: 1,
+          },
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.3,
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <footer className="bg-white relative mt-4 flex">
+    <footer ref={containerRef} className="bg-white relative mt-4 flex">
       <div className="w-[95%] mx-auto py-7 md:gap-4 grid md:grid-cols-2 lg:grid-cols-3 z-10">
-        <div className="">
+        <div className="footer-section">
           <Image
             src="/images/logo.svg"
             alt="Logo"
             height={50}
             width={150}
-            className="bg-white rounded-lg p-2"
+            className="bg-white rounded-lg p-2 footer-logo"
           />
 
           <p className="text-sm text-black my-7">

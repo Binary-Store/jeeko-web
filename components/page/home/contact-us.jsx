@@ -1,3 +1,5 @@
+"use client";
+
 import { IoCall } from "react-icons/io5";
 import { IoMdMail } from "react-icons/io";
 import { FaRegClock } from "react-icons/fa6";
@@ -5,10 +7,85 @@ import { FaLocationDot } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactUs() {
+  const containerRef = useRef();
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        "h2",
+        {
+          y: 50,
+          opacity: 0,
+        },
+        {
+          scrollTrigger: {
+            trigger: "h2",
+            start: "top 90%",
+            end: "200px 90%",
+            toggleActions: "play none none reverse",
+          },
+          y: 0,
+          opacity: 1,
+          duration: 2,
+        }
+      );
+
+      gsap.fromTo(
+        ".contact-card",
+        {
+          y: 100,
+          opacity: 0,
+          rotate: 10,
+        },
+        {
+          scrollTrigger: {
+            trigger: ".contact-card",
+            start: "top 95%",
+            end: "bottom 95%",
+            toggleActions: "play none none reverse",
+            scrub: 1,
+          },
+          y: 0,
+          opacity: 1,
+          rotate: 0,
+          duration: 1,
+          stagger: 0.2,
+        }
+      );
+
+      gsap.fromTo(
+        ".contact-form",
+        {
+          x: 100,
+          opacity: 0,
+        },
+        {
+          scrollTrigger: {
+            trigger: ".contact-form",
+            start: "top 90%",
+            end: "bottom 90%",
+            toggleActions: "play none none reverse",
+            scrub: 1,
+          },
+          x: 0,
+          opacity: 1,
+          duration: 1.5,
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <div className="bg-primary w-full py-10">
+    <div ref={containerRef} className="bg-primary w-full py-10">
       <div className="w-[95%] mx-auto flex items-center gap-12">
         <div className="w-full">
           <h2 className="text-4xl font-bold text-white">Get in touch</h2>
@@ -20,7 +97,7 @@ export default function ContactUs() {
             out to us—we'd love to hear from you!
           </p>
           <div className="bg-[#EAEAEA] rounded-xl p-7 mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl">
+            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl contact-card">
               <div className="bg-primary rounded-xl p-3">
                 <IoCall className="size-5 text-white" />
               </div>
@@ -31,7 +108,7 @@ export default function ContactUs() {
                 <div className="text-sm sm:text-base">+91 9156261648</div>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl">
+            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl contact-card">
               <div className="bg-primary rounded-xl p-3 ">
                 <FaRegClock className="size-5 text-white" />
               </div>
@@ -42,7 +119,7 @@ export default function ContactUs() {
                 <div className="text-sm sm:text-base">09:00 AM - 05:00 PM</div>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl">
+            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl contact-card">
               <div className="bg-primary rounded-xl p-3 ">
                 <IoMdMail className="size-5 text-white" />
               </div>
@@ -51,7 +128,7 @@ export default function ContactUs() {
                 <div className="text-sm sm:text-base">marketing@jeeko.com</div>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl">
+            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl contact-card">
               <div className="bg-primary rounded-xl p-3 ">
                 <FaLocationDot className="size-5 text-white" />
               </div>
@@ -68,7 +145,7 @@ export default function ContactUs() {
           </div>
         </div>
         <div className="w-3/4">
-          <div className="bg-white rounded-xl p-7">
+          <div className="bg-white rounded-xl p-7 contact-form">
             <h2 className="text-2xl font-bold text-primary mb-4">
               Send us a message
             </h2>

@@ -1,5 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import { Star } from "lucide-react";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const testimonials = [
   {
@@ -29,8 +37,55 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const containerRef = useRef();
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        "h2",
+        {
+          y: 50,
+          opacity: 0,
+        },
+        {
+          scrollTrigger: {
+            trigger: "h2",
+            start: "top 90%",
+            end: "200px 90%",
+            toggleActions: "play none none reverse",
+          },
+          y: 0,
+          opacity: 1,
+          duration: 2,
+        }
+      );
+
+      gsap.fromTo(
+        ".testimonial-card",
+        {
+          opacity: 0,
+          rotateY: 90,
+        },
+        {
+          scrollTrigger: {
+            trigger: ".testimonial-card",
+            start: "top 95%",
+            end: "200px 95%",
+            toggleActions: "play none none reverse",
+            scrub: 1,
+          },
+
+          opacity: 1,
+          rotateY: 0,
+          stagger: 0.5,
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section className="w-full mx-auto my-10">
+    <section ref={containerRef} className="w-full mx-auto my-10">
       <h2 className="text-4xl text-center font-bold">
         What Our Customers Say?
       </h2>
@@ -40,7 +95,7 @@ export default function Testimonials() {
         {testimonials.map((testimonial, index) => (
           <div
             key={index}
-            className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow"
+            className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow testimonial-card"
           >
             <div className="flex items-center gap-4 mb-4">
               <Image

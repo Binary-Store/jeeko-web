@@ -1,4 +1,8 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import "./style/hero.css";
 import {
@@ -9,6 +13,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Users } from "lucide-react";
+import { useRef } from "react";
 
 const productCategories = [
   {
@@ -26,8 +31,25 @@ const productCategories = [
 ];
 
 export default function Hero() {
+  const containerRef = useRef();
+
+  useGSAP(
+    () => {
+      gsap.from(
+        ".info-container, .jeeko-logo, .kk-logo, .category-container, .approvals, .customer-count, .years-of-experience",
+        {
+          opacity: 0,
+          y: 100,
+          duration: 0.7,
+          stagger: 0.2,
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section className="w-[95%] hero-container mx-auto">
+    <section ref={containerRef} className="w-[95%] hero-container mx-auto">
       <div className="bg-white p-6 rounded-xl space-y-4 info-container">
         <h3 className="text-primary font-semibold text-md">Welcome to JEEKO</h3>
 
@@ -118,7 +140,7 @@ export default function Hero() {
           <p>Happy Customers</p>
         </div>
       </div>
-      <div className="flex flex-col py-7 gap-5 items-center justify-center bg-white rounded-xl">
+      <div className="flex flex-col py-7 gap-5 items-center justify-center bg-white rounded-xl years-of-experience">
         <h2 className="text-primary font-bold text-4xl">3+</h2>
         <div className="font-bold flex items-center gap-2">
           <p>Years of Experience</p>

@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import { Button } from "@/components/ui/button";
 import { AlignJustify, ChevronDown } from "lucide-react";
@@ -49,6 +53,28 @@ const productCategories = [
 ];
 
 export default function Header() {
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    tl.fromTo(
+      "header",
+      { opacity: 0, y: -100 },
+      { opacity: 1, y: 0, duration: 0.5 }
+    );
+
+    tl.fromTo(
+      "header > a",
+      { opacity: 0, y: -100 },
+      { opacity: 1, y: 0, duration: 0.5 }
+    );
+
+    tl.fromTo(
+      "header .nav-item",
+      { opacity: 0, y: -100 },
+      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }
+    );
+  });
+
   return (
     <header className="bg-white p-3 rounded-xl w-[95%] mx-auto m-4 flex justify-between items-center !min-h-16 !max-h-16">
       <Link href="/">
@@ -60,7 +86,7 @@ export default function Header() {
             <NavigationMenuItem>
               <NavigationMenuLink
                 href="/"
-                className={navigationMenuTriggerStyle()}
+                className={cn(navigationMenuTriggerStyle(), "nav-item")}
               >
                 Home
               </NavigationMenuLink>
@@ -68,7 +94,7 @@ export default function Header() {
             <NavigationMenuItem>
               <NavigationMenuLink
                 href="/about"
-                className={navigationMenuTriggerStyle()}
+                className={cn(navigationMenuTriggerStyle(), "nav-item")}
               >
                 About us
               </NavigationMenuLink>
@@ -77,7 +103,7 @@ export default function Header() {
         </NavigationMenu>
         <NavigationMenu>
           <NavigationMenuList>
-            <NavigationMenuItem>
+            <NavigationMenuItem className="nav-item">
               <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="w-[200px]">
@@ -97,7 +123,7 @@ export default function Header() {
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
-            <NavigationMenuItem>
+            <NavigationMenuItem className="nav-item">
               <NavigationMenuLink
                 href="/products"
                 className={cn(navigationMenuTriggerStyle())}
@@ -105,7 +131,7 @@ export default function Header() {
                 Products
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem>
+            <NavigationMenuItem className="nav-item">
               <NavigationMenuLink
                 href="/brochures"
                 className={cn(navigationMenuTriggerStyle())}

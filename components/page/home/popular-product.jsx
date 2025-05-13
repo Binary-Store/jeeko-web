@@ -70,7 +70,7 @@ export default function PopularProduct() {
   );
 
   return (
-    <section ref={containerRef} className="w-full mx-auto my-10">
+    <section ref={containerRef} className="w-full mx-auto mb-8">
       <h2 className="text-4xl text-center font-bold">Popular Products</h2>
       <div className="w-32 h-1 bg-primary mx-auto my-2"></div>
       <div className="w-[95%] mx-auto flex justify-end">

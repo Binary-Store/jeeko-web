@@ -1,17 +1,17 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import "./style/hero.css";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+// import {
+//   Carousel,
+//   CarouselContent,
+//   CarouselItem,
+//   CarouselNext,
+//   CarouselPrevious,
+// } from "@/components/ui/carousel";
 import { Users } from "lucide-react";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -19,20 +19,33 @@ import { TextPlugin } from "gsap/TextPlugin";
 
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-const productCategories = [
-  {
-    name: "Tiller",
-    image: "/images/category/tiller.png",
-  },
-  {
-    name: "Generator",
-    image: "/images/category/generator.png",
-  },
-  {
-    name: "Pumps",
-    image: "/images/category/pump.png",
-  },
-];
+// const productCategories = [
+//   {
+//     name: "Tiller",
+//     image: "/images/category/tiller.png",
+//   },
+//   {
+//     name: "Generator",
+//     image: "/images/category/generator.png",
+//   },
+//   {
+//     name: "Pumps",
+//     image: "/images/category/pump.png",
+//   },
+// ];
+
+// const banner = [
+//   {
+//     image: "/images/4.png",
+//   },
+//   {
+//     image: "/images/5.png",
+//   },
+//   {
+//     image: "/images/6.png",
+//   },
+  
+// ];
 
 export default function Hero() {
   const containerRef = useRef();
@@ -82,7 +95,8 @@ export default function Hero() {
 
   return (
     <section ref={containerRef} className="w-[95%] hero-container mx-auto">
-      <div className="bg-white p-6 rounded-xl space-y-4 info-container">
+
+      {/* <div className="bg-white p-6 rounded-xl space-y-4 info-container">
         <h3 className="text-primary font-semibold text-md">Welcome to JEEKO</h3>
 
         <h2 className="font-bold text-4xl">
@@ -96,9 +110,9 @@ export default function Hero() {
         </p>
 
         <Button>Contact Us</Button>
-      </div>
+      </div> */}
 
-      <div className="w-full p-4 bg-white flex justify-center items-center rounded-xl jeeko-logo">
+      {/* <div className="w-full p-4 bg-white flex justify-center items-center rounded-xl jeeko-logo">
         <Image
           src="/images/logo.svg"
           alt="hero"
@@ -141,7 +155,7 @@ export default function Hero() {
           <CarouselPrevious className="absolute h-12 w-12 left-0 border-primary text-primary hover:bg-primary/20 hover:text-primary" />
           <CarouselNext className="absolute h-12 w-12 right-0 border-primary text-primary hover:bg-primary/20 hover:text-primary" />
         </Carousel>
-      </div>
+      </div> */}
       <div className="approvals flex py-7 items-center justify-around bg-white rounded-xl">
         <Image
           src="/images/isi-logo.png"

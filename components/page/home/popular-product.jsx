@@ -90,8 +90,10 @@ export default function PopularProduct() {
                   className="mx-auto w-2/3 h-40 object-contain"
                   src={product.image}
                   alt={product.name}
-                  width={100}
-                  height={100}
+                  width={400}
+                  height={400}
+                  quality={100}
+                  priority={index < 4}
                 />
 
                 <div className="flex justify-between">

@@ -78,7 +78,7 @@ export default function Footer() {
             start: "top 95%",
             end: "bottom 95%",
             toggleActions: "play none none reverse",
-            scrub: 1,
+            // scrub: 1,
           },
           y: 0,
           opacity: 1,

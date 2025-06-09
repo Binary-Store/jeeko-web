@@ -72,7 +72,7 @@ export default function Testimonials() {
             start: "top 95%",
             end: "200px 95%",
             toggleActions: "play none none reverse",
-            scrub: 1,
+            // scrub: 1,
           },
 
           opacity: 1,

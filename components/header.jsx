@@ -76,7 +76,7 @@ export default function Header() {
   });
 
   return (
-    <header className="bg-white p-3 rounded-xl w-[95%] mx-auto m-4 flex justify-between items-center !min-h-16 !max-h-16 relative z-10">
+    <header className="bg-white p-3 rounded-xl app-container mx-auto m-4 flex justify-between items-center !min-h-16 !max-h-16 relative z-10">
       <Link href="/">
         <Image src="/images/logo.svg" alt="logo" width={100} height={100} />
       </Link>
@@ -84,20 +84,20 @@ export default function Header() {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuLink
+              <Link
                 href="/"
                 className={cn(navigationMenuTriggerStyle(), "nav-item")}
               >
                 Home
-              </NavigationMenuLink>
+              </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink
+              <Link
                 href="/about"
                 className={cn(navigationMenuTriggerStyle(), "nav-item")}
               >
                 About us
-              </NavigationMenuLink>
+              </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
@@ -108,7 +108,7 @@ export default function Header() {
               <NavigationMenuContent>
                 <div className="w-[200px]">
                   {productCategories.map((item) => (
-                    <NavigationMenuLink key={item.name} href={item.path}>
+                    <Link key={item.name} href={item.path}>
                       <div className="flex items-center gap-2">
                         <Image
                           src={item.icon}
@@ -118,26 +118,26 @@ export default function Header() {
                         />
                         {item.name}
                       </div>
-                    </NavigationMenuLink>
+                    </Link>
                   ))}
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem className="nav-item">
-              <NavigationMenuLink
+              <Link
                 href="/products"
                 className={cn(navigationMenuTriggerStyle())}
               >
                 Products
-              </NavigationMenuLink>
+              </Link>
             </NavigationMenuItem>
             <NavigationMenuItem className="nav-item">
-              <NavigationMenuLink
+              <Link
                 href="/brochures"
                 className={cn(navigationMenuTriggerStyle())}
               >
                 Brochures
-              </NavigationMenuLink>
+              </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
@@ -149,45 +149,49 @@ export default function Header() {
       </Link>
 
       <Sheet>
-        <SheetTrigger className="bg-primary text-white rounded-lg h-fit p-2 lg:hidden">
+        <SheetTrigger aria-label="Open menu" className="bg-primary text-white rounded-lg h-fit p-2 lg:hidden">
           <AlignJustify />
         </SheetTrigger>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle className="text-primary">Menu Items</SheetTitle>
+        <SheetContent className="p-0 flex flex-col h-full">
+          <SheetHeader className="p-4 pb-0">
+            <SheetTitle className="text-primary">Menu</SheetTitle>
           </SheetHeader>
-          <div className="flex flex-col gap-7 mt-5 p-4 justify-start">
-            <Link href="/">Home</Link>
-            <Link href="/about-us">About Us</Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="text-left cursor-pointer flex items-center gap-2">
-                Categories <ChevronDown />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                {productCategories.map((category, index) => (
-                  <DropdownMenuItem key={index}>
-                    <Link
-                      href={category.path}
-                      key={index}
-                      className="flex items-center gap-2 p-2 rounded-lg hover:bg-secondary/5"
-                    >
-                      <Image
-                        src={category.icon}
-                        alt="Tools 1"
-                        quality={80}
-                        height={30}
-                        width={30}
-                        priority
-                        className="rounded-md object-cover"
-                      />
-                      <span>{category.name}</span>
-                    </Link>
-                  </DropdownMenuItem>
+          <nav className="flex-1 overflow-y-auto flex flex-col gap-2 p-4 pt-2">
+            <Link href="/" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium">Home</Link>
+            <Link href="/about" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium">About Us</Link>
+            <div>
+              <div className="font-semibold text-sm text-muted-foreground mb-1 mt-2">Categories</div>
+              <div className="flex flex-col gap-1">
+                {productCategories.map((category) => (
+                  <Link
+                    href={category.path}
+                    className="flex items-center gap-2 py-2 px-2 rounded-lg hover:bg-secondary/10 text-base"
+                    key={category.name}
+                  >
+                    <Image
+                      src={category.icon}
+                      alt={category.name}
+                      quality={80}
+                      height={24}
+                      width={24}
+                      priority
+                      className="rounded-md object-cover"
+                    />
+                    <span>{category.name}</span>
+                  </Link>
                 ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <Link href="/brochure">Broucher</Link>
-            <Link href="/contact-us">Contact Us</Link>
+              </div>
+            </div>
+            <div className="border-t my-3" />
+            <Link href="/brochures" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium">Brochures</Link>
+            <Link href="/products" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium">Products</Link>
+          </nav>
+          <div className="p-4 border-t">
+            <Link href="/contact-us">
+              <Button size="lg" className="w-full font-semibold">
+                Contact Us
+              </Button>
+            </Link>
           </div>
         </SheetContent>
       </Sheet>

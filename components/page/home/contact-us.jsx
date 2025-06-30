@@ -43,7 +43,6 @@ export default function ContactUs() {
         {
           y: 100,
           opacity: 0,
-          rotate: 10,
         },
         {
           scrollTrigger: {
@@ -55,7 +54,6 @@ export default function ContactUs() {
           },
           y: 0,
           opacity: 1,
-          rotate: 0,
           duration: 1,
           stagger: 0.2,
         }
@@ -64,7 +62,7 @@ export default function ContactUs() {
       gsap.fromTo(
         ".contact-form",
         {
-          x: 100,
+          y: 100,
           opacity: 0,
         },
         {
@@ -75,7 +73,7 @@ export default function ContactUs() {
             toggleActions: "play none none reverse",
             scrub: 1,
           },
-          x: 0,
+          y: 0,
           opacity: 1,
           duration: 1.5,
         }
@@ -86,7 +84,7 @@ export default function ContactUs() {
 
   return (
     <div ref={containerRef} className="bg-primary w-full py-10">
-      <div className="w-[95%] mx-auto flex items-center gap-12">
+      <div className="w-[95%] mx-auto flex flex-col md:flex-row items-center gap-12">
         <div className="w-full">
           <h2 className="text-4xl font-bold text-white">Get in touch</h2>
           <h3 className="text-white text-xl"> We're Here to Help</h3>
@@ -144,7 +142,7 @@ export default function ContactUs() {
             </div>
           </div>
         </div>
-        <div className="w-3/4">
+        <div className="w-full md:w-3/4">
           <div className="bg-white rounded-xl p-7 contact-form">
             <h2 className="text-2xl font-bold text-primary mb-4">
               Send us a message

@@ -146,7 +146,7 @@ export default function ProductCategories() {
               dynamicBullets: true,
             }}
             autoplay={{
-              delay: 2500,
+              delay: 5000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
@@ -183,7 +183,7 @@ export default function ProductCategories() {
                         className="object-cover w-full h-full"
                       />
                     </div>
-                    <h3 className="text-xl text-gray-800 font-medium text-center group-hover:text-red-600 transition-colors duration-300">
+                    <h3 className="text-2xl font-bold text-primary text-center group-hover:text-red-600 transition-colors duration-300">
                       {category.name}
                     </h3>
                     <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />

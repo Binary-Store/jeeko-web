@@ -1,13 +1,24 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 const CustomCursor = () => {
   const cursorRef = useRef(null);
   const cursorDotRef = useRef(null);
+  const [showCursor, setShowCursor] = useState(false);
 
   useEffect(() => {
+    const handleResize = () => {
+      setShowCursor(window.innerWidth >= 768);
+    };
+    handleResize(); // set initial value
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!showCursor) return;
     const cursor = cursorRef.current;
     const cursorDot = cursorDotRef.current;
 
@@ -62,7 +73,9 @@ const CustomCursor = () => {
       window.removeEventListener("mouseenter", handleMouseEnter);
       window.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []);
+  }, [showCursor]);
+
+  if (!showCursor) return null;
 
   return (
     <>

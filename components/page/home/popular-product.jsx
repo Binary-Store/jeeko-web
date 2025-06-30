@@ -37,7 +37,7 @@ export default function PopularProduct() {
           },
           y: 0,
           opacity: 1,
-          duration: 2,
+          duration: 1,
         }
       );
 
@@ -46,8 +46,6 @@ export default function PopularProduct() {
         {
           y: 100,
           opacity: 0,
-          rotateY: 90,
-          rotateX: 90,
         },
         {
           scrollTrigger: {
@@ -59,10 +57,8 @@ export default function PopularProduct() {
           },
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: 0.5,
           stagger: 0.5,
-          rotateY: 0,
-          rotateX: 0,
         }
       );
     },
@@ -79,15 +75,15 @@ export default function PopularProduct() {
         </Link>
       </div>
       <div className="w-[95%] mx-auto">
-        <div className="grid my-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid my-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
           {popularProducts.map((product, index) => (
             <Card
               key={index}
-              className="hover:shadow-lg hover:scale-105 transition-all duration-300 product-card"
+              className="hover:shadow-lg hover:scale-105 transition-all duration-300 product-card pt-0 md:pt-5"
             >
               <CardContent>
                 <Image
-                  className="mx-auto w-2/3 h-40 object-contain"
+                  className="mx-auto w-full md:w-2/3 h-40 object-contain"
                   src={product.image}
                   alt={product.name}
                   width={400}
@@ -96,14 +92,14 @@ export default function PopularProduct() {
                   priority={index < 4}
                 />
 
-                <div className="flex justify-between">
+                <div className="md:flex justify-between">
                   <h3 className="text-lg font-bold">{product.name}</h3>
                   <Badge variant="outline">{product.category}</Badge>
                 </div>
-                <p className="text-sm mt-2 text-gray-500">
+                <p className="text-xs md:text-sm mt-2 text-gray-500">
                   {product.description}
                 </p>
-                <p className="text-sm mt-2 text-gray-500">
+                <p className="md:text-sm mt-2 text-gray-500">
                   Price:{" "}
                   <span className="text-primary text-lg font-bold">
                     ₹{product.price}

@@ -77,7 +77,7 @@ export default function WhyUs() {
       gsap.fromTo(
         ".point-card",
         {
-          x: -100,
+          y: 100,
           opacity: 0,
         },
         {
@@ -88,32 +88,32 @@ export default function WhyUs() {
             toggleActions: "play none none reverse",
             scrub: 1,
           },
-          x: 0,
+          y: 0,
           opacity: 1,
           duration: 1,
           stagger: 0.4,
         }
       );
 
-      gsap.fromTo(
-        ".banner-image",
-        {
-          x: 100,
-          opacity: 0,
-        },
-        {
-          scrollTrigger: {
-            trigger: ".banner-image",
-            start: "top 90%",
-            end: "bottom 90%",
-            toggleActions: "play none none reverse",
-            scrub: 1,
-          },
-          x: 0,
-          opacity: 1,
-          duration: 1.5,
-        }
-      );
+      // gsap.fromTo(
+      //   ".banner-image",
+      //   {
+      //     y: 100,
+      //     opacity: 0,
+      //   },
+      //   {
+      //     scrollTrigger: {
+      //       trigger: ".banner-image",
+      //       start: "top 90%",
+      //       end: "bottom 90%",
+      //       toggleActions: "play none none reverse",
+      //       scrub: 1,
+      //     },
+      //     x: 0,
+      //     opacity: 1,
+      //     duration: 1.5,
+      //   }
+      // );
     },
     { scope: containerRef }
   );
@@ -125,7 +125,7 @@ export default function WhyUs() {
       </h2>
       <div className="w-32 h-1 bg-primary mx-auto my-2"></div>
 
-      <div className="w-[95%] mx-auto flex gap-4 my-7">
+      <div className="w-[95%] mx-auto flex flex-col md:flex-row gap-4 my-7">
         <div className="space-y-4 w-full">
           {points.map((point, index) => (
             <div

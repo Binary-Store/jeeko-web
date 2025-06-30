@@ -103,7 +103,7 @@ export default function Testimonials() {
                 alt={testimonial.name}
                 width={60}
                 height={60}
-                className="rounded-full size-14 object-cover"
+                className="rounded-full size-10 md:size-14 object-cover"
               />
               <div>
                 <h3 className="font-bold">{testimonial.name}</h3>
@@ -119,7 +119,9 @@ export default function Testimonials() {
               ))}
             </div>
 
-            <p className="text-muted-foreground">{testimonial.comment}</p>
+            <p className="text-sm md:text-base text-muted-foreground">
+              {testimonial.comment}
+            </p>
           </div>
         ))}
       </div>

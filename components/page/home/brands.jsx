@@ -30,7 +30,7 @@ export default function Brands() {
           },
           y: 0,
           opacity: 1,
-          duration: 2,
+          duration: 1,
         }
       );
 
@@ -39,7 +39,6 @@ export default function Brands() {
         {
           y: 100,
           opacity: 0,
-          rotate: 10,
         },
         {
           scrollTrigger: {
@@ -51,8 +50,7 @@ export default function Brands() {
           },
           y: 0,
           opacity: 1,
-          rotate: 0,
-          duration: 1,
+          duration: 0.5,
           stagger: 0.2,
         }
       );
@@ -65,7 +63,7 @@ export default function Brands() {
       <h2 className="text-4xl text-center font-bold">Our Brands</h2>
       <div className="w-32 h-1 bg-primary mx-auto my-2"></div>
 
-      <div className="w-[95%] mx-auto flex gap-4 my-7">
+      <div className="w-[95%] mx-auto flex flex-col md:flex-row gap-2 md:gap-4 my-7">
         <div className="w-full bg-white rounded-xl p-5 brand-card">
           <div className="w-full flex items-center gap-4">
             <Image
@@ -77,7 +75,7 @@ export default function Brands() {
             />
             <div>
               <h2 className="text-primary font-bold">JEEKO</h2>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-sm md:text-base">
                 Our main brand specializing in high-quality generators designed
                 for reliability and performance in various settings, from homes
                 to farms.
@@ -88,16 +86,16 @@ export default function Brands() {
           <div className="w-full flex gap-5">
             <Image
               src="/images/jeeko-brochure.png"
-              className="object-contain shadow-lg rounded border w-48"
+              className="object-contain shadow-lg rounded border h-fit w-1/3 md:w-48"
               alt="JEEKO"
               width={500}
               height={500}
             />
             <div className="space-y-2">
-              <h3 className="text-2xl font-bold">
+              <h3 className="text-lg md:text-2xl font-bold">
                 Get manuals and support for your JEEKO machine
               </h3>
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside text-sm md:text-base">
                 <li>Products</li>
                 <li>Pricing</li>
                 <li>Service & Support</li>
@@ -118,7 +116,7 @@ export default function Brands() {
             />
             <div>
               <h2 className="text-primary font-bold">Kishan King</h2>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-sm md:text-base">
                 Our sub-brand dedicated to agricultural equipment and farming
                 tools designed to enhance productivityfor Indian farmers.
               </p>
@@ -128,16 +126,16 @@ export default function Brands() {
           <div className="w-full flex gap-5">
             <Image
               src="/images/kk-brochure.png"
-              className="object-contain shadow-lg rounded border w-48"
+              className="object-contain shadow-lg rounded border h-fit w-1/3 md:w-48"
               alt="JEEKO"
               width={500}
               height={500}
             />
             <div className="space-y-2">
-              <h3 className="text-2xl font-bold">
+              <h3 className="text-lg md:text-2xl font-bold">
                 Get manuals and support for your JEEKO machine
               </h3>
-              <ul className="list-disc list-inside">
+              <ul className="list-disc list-inside text-sm md:text-base">
                 <li>Products</li>
                 <li>Pricing</li>
                 <li>Service & Support</li>

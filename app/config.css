@@ -1,0 +1,22 @@
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.app-container {
+  width: calc(100vw - calc(var(--spacing) * 4));
+
+
+
+  @media (width >=40rem) {
+    width: calc(100vw - calc(var(--spacing) * 8));
+  }
+
+
+
+}

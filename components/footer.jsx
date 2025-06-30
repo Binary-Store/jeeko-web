@@ -98,7 +98,7 @@ export default function Footer() {
             </span>
           </div>
           <a
-            href="https://wa.me/919156261648?text=Hello, I would like to inquire about your products."
+            href="https://wa.me/919426226165?text=Hello, I would like to inquire about your products."
             target="_blank"
             rel="noopener noreferrer"
             className="block mt-2"

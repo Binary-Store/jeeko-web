@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { AlignJustify, ChevronDown } from "lucide-react";
@@ -53,6 +54,8 @@ const productCategories = [
 ];
 
 export default function Header() {
+  const [sheetOpen, setSheetOpen] = useState(false);
+
   useGSAP(() => {
     const tl = gsap.timeline();
 
@@ -108,7 +111,7 @@ export default function Header() {
               <NavigationMenuContent>
                 <div className="w-[200px]">
                   {productCategories.map((item) => (
-                    <Link key={item.name} href={item.path}>
+                    <Link key={item.name} href='/products'>
                       <div className="flex items-center gap-2">
                         <Image
                           src={item.icon}
@@ -148,7 +151,7 @@ export default function Header() {
         </Button>
       </Link>
 
-      <Sheet>
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger aria-label="Open menu" className="bg-primary text-white rounded-lg h-fit p-2 lg:hidden">
           <AlignJustify />
         </SheetTrigger>
@@ -157,8 +160,8 @@ export default function Header() {
             <SheetTitle className="text-primary">Menu</SheetTitle>
           </SheetHeader>
           <nav className="flex-1 overflow-y-auto flex flex-col gap-2 p-4 pt-2">
-            <Link href="/" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium">Home</Link>
-            <Link href="/about" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium">About Us</Link>
+            <Link href="/" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium" onClick={() => setSheetOpen(false)}>Home</Link>
+            <Link href="/about" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium" onClick={() => setSheetOpen(false)}>About Us</Link>
             <div>
               <div className="font-semibold text-sm text-muted-foreground mb-1 mt-2">Categories</div>
               <div className="flex flex-col gap-1">
@@ -167,6 +170,7 @@ export default function Header() {
                     href={category.path}
                     className="flex items-center gap-2 py-2 px-2 rounded-lg hover:bg-secondary/10 text-base"
                     key={category.name}
+                    onClick={() => setSheetOpen(false)}
                   >
                     <Image
                       src={category.icon}
@@ -183,11 +187,11 @@ export default function Header() {
               </div>
             </div>
             <div className="border-t my-3" />
-            <Link href="/brochures" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium">Brochures</Link>
-            <Link href="/products" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium">Products</Link>
+            <Link href="/brochures" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium" onClick={() => setSheetOpen(false)}>Brochures</Link>
+            <Link href="/products" className="py-3 px-2 rounded-lg hover:bg-secondary/10 text-base font-medium" onClick={() => setSheetOpen(false)}>Products</Link>
           </nav>
           <div className="p-4 border-t">
-            <Link href="/contact-us">
+            <Link href="/contact-us" onClick={() => setSheetOpen(false)}>
               <Button size="lg" className="w-full font-semibold">
                 Contact Us
               </Button>

@@ -42,27 +42,7 @@ const productCategories = [
 export default function Footer() {
   const containerRef = useRef();
 
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        ".footer-section",
-        { y: 50, opacity: 0 },
-        {
-          scrollTrigger: {
-            trigger: ".footer-section",
-            start: "top 95%",
-            end: "bottom 95%",
-            toggleActions: "play none none reverse",
-          },
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.2,
-        }
-      );
-    },
-    { scope: containerRef }
-  );
+
 
   return (
     <footer ref={containerRef} className="bg-[#F7F7F9] border-t border-gray-200 mt-8 pt-10">

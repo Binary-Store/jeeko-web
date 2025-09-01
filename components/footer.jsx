@@ -42,123 +42,150 @@ const productCategories = [
 export default function Footer() {
   const containerRef = useRef();
 
-
-
   return (
     <footer ref={containerRef} className="bg-[#F7F7F9] border-t border-gray-200 mt-8 pt-10">
-      <div className="w-[95%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 pb-8">
         {/* Brand & Contact */}
-        <div className="footer-section flex flex-col gap-5">
+        <div className="footer-section flex flex-col gap-4 sm:gap-5 sm:col-span-2 lg:col-span-1">
           <Image
             src="/images/logo.svg"
             alt="Jeeko Agro Industries Logo"
             height={50}
             width={150}
-            className="bg-white rounded-lg p-2"
+            className="rounded-lg p-2 w-fit"
           />
-          <p className="text-sm text-gray-700">
+          <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
             Jeeko Agro Industries, a leading manufacturer of high-quality agricultural and farming tools, is dedicated to empowering farmers and agricultural businesses with reliable, innovative, and efficient equipment.
           </p>
-          <div className="flex items-center gap-3">
-            <span className="bg-primary rounded-xl p-2"><IoCall className="text-white size-5" /></span>
-            <span className="text-gray-700 text-sm">+91 9156261648</span>
+          
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <span className="bg-primary rounded-xl p-2 flex-shrink-0">
+                <IoCall className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+              </span>
+              <span className="text-gray-700 text-xs sm:text-sm">+91 9156261648</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="bg-primary rounded-xl p-2 flex-shrink-0">
+                <IoMdMail className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+              </span>
+              <span className="text-gray-700 text-xs sm:text-sm">marketing@jeeko.com</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="bg-primary rounded-xl p-2 flex-shrink-0">
+                <FaRegClock className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+              </span>
+              <span className="text-gray-700 text-xs sm:text-sm">09:00 AM - 05:00 PM</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="bg-primary rounded-xl p-2 flex-shrink-0 mt-0.5">
+                <FaLocationDot className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+              </span>
+              <span className="text-gray-700 text-xs sm:text-sm leading-relaxed">
+                GAT No. 2022/5, Ambethan Bordara Road, Chakan Road, Chakan, Pune, Maharashtra, 410501
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="bg-primary rounded-xl p-2"><IoMdMail className="text-white size-5" /></span>
-            <span className="text-gray-700 text-sm">marketing@jeeko.com</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="bg-primary rounded-xl p-2"><FaRegClock className="text-white size-5" /></span>
-            <span className="text-gray-700 text-sm">09:00 AM - 05:00 PM</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="bg-primary rounded-xl p-2"><FaLocationDot className="text-white size-5" /></span>
-            <span className="text-gray-700 text-sm">
-              GAT No. 2022/5, Ambethan Bordara Road, Chakan Road, Chakan, Pune, Maharashtra, 410501
-            </span>
-          </div>
+
           <a
             href="https://wa.me/919426226165?text=Hello, I would like to inquire about your products."
             target="_blank"
             rel="noopener noreferrer"
             className="block mt-2"
           >
-            <Button className="w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white flex items-center gap-2" size="lg">
-              <FaWhatsapp className="size-5" /> Enquire on WhatsApp
+            <Button className="w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white flex items-center gap-2" size="sm">
+              <FaWhatsapp className="w-4 h-4 sm:w-5 sm:h-5" /> Enquire on WhatsApp
             </Button>
           </a>
         </div>
+
         {/* Product Categories */}
         <div className="footer-section">
-          <h3 className="text-lg font-semibold text-primary mb-3">Product Categories</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-primary mb-3">Product Categories</h3>
           <Separator className="h-0.5 bg-primary mb-4" />
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2 sm:gap-3">
             {productCategories.map((cat) => (
               <Link
                 key={cat.name}
                 href={cat.path}
-                className="flex items-center gap-3 text-gray-700 hover:text-primary text-sm"
+                className="flex items-center gap-3 text-gray-700 hover:text-primary text-xs sm:text-sm transition-colors duration-200"
               >
                 <Image
                   src={cat.icon}
                   alt={cat.name}
                   quality={80}
-                  height={24}
-                  width={24}
+                  height={20}
+                  width={20}
                   priority
-                  className="rounded-md object-cover"
+                  className="rounded-md object-cover flex-shrink-0"
                 />
                 {cat.name}
               </Link>
             ))}
           </div>
         </div>
+
         {/* Quick Links */}
         <div className="footer-section">
-          <h3 className="text-lg font-semibold text-primary mb-3">Quick Links</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-primary mb-3">Quick Links</h3>
           <Separator className="h-0.5 bg-primary mb-4" />
-          <div className="flex flex-col gap-3">
-            <Link href="/">Home</Link>
-            <Link href="/about">About Us</Link>
-            <Link href="/products">Products</Link>
-            <Link href="/contact-us">Contact Us</Link>
-            <Link href="/brochures">Brochures</Link>
+          <div className="flex flex-col gap-2 sm:gap-3">
+            <Link href="/" className="text-xs sm:text-sm text-gray-700 hover:text-primary transition-colors duration-200">
+              Home
+            </Link>
+            <Link href="/about" className="text-xs sm:text-sm text-gray-700 hover:text-primary transition-colors duration-200">
+              About Us
+            </Link>
+            <Link href="/products" className="text-xs sm:text-sm text-gray-700 hover:text-primary transition-colors duration-200">
+              Products
+            </Link>
+            <Link href="/contact-us" className="text-xs sm:text-sm text-gray-700 hover:text-primary transition-colors duration-200">
+              Contact Us
+            </Link>
+            <Link href="/brochures" className="text-xs sm:text-sm text-gray-700 hover:text-primary transition-colors duration-200">
+              Brochures
+            </Link>
           </div>
         </div>
+
         {/* Social Media */}
         <div className="footer-section">
-          <h3 className="text-lg font-semibold text-primary mb-3">Connect with Us</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-primary mb-3">Connect with Us</h3>
           <Separator className="h-0.5 bg-primary mb-4" />
           <div className="flex gap-3 mt-4">
             <Button
-              className="rounded-full"
+              className="rounded-full w-8 h-8 sm:w-10 sm:h-10"
               size="icon"
               aria-label="Facebook"
               onClick={() => window.open("https://www.facebook.com/profile.php?id=61555166633293")}
             >
-              <FacebookIcon />
+              <FacebookIcon className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
             <Button
-              className="rounded-full"
+              className="rounded-full w-8 h-8 sm:w-10 sm:h-10"
               size="icon"
               aria-label="YouTube"
               onClick={() => window.open("https://www.youtube.com/@prostarcnc7217")}
             >
-              <Youtube />
+              <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
             <Button
-              className="rounded-full"
+              className="rounded-full w-8 h-8 sm:w-10 sm:h-10"
               size="icon"
               aria-label="LinkedIn"
               onClick={() => window.open("https://www.linkedin.com/company/shubhline-automation-pvt-ltd/?viewAsMember=true")}
             >
-              <Linkedin />
+              <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Copyright Section */}
       <div className="w-full bg-primary/10 py-4 text-center text-xs text-gray-600 border-t border-gray-200">
-        &copy; {new Date().getFullYear()} Jeeko Agro Industries. All rights reserved.
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          &copy; {new Date().getFullYear()} Jeeko Agro Industries. All rights reserved.
+        </div>
       </div>
     </footer>
   );

@@ -9,89 +9,27 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useRef, useState } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useState } from "react";
 
 export default function ContactPage() {
-  const containerRef = useRef();
   const [success, setSuccess] = useState(false);
 
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        ".contact-hero",
-        { y: 50, opacity: 0 },
-        {
-          scrollTrigger: {
-            trigger: ".contact-hero",
-            start: "top 90%",
-            end: "200px 90%",
-            toggleActions: "play none none reverse",
-          },
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-        }
-      );
-      gsap.fromTo(
-        ".contact-info-card",
-        { y: 100, opacity: 0 },
-        {
-          scrollTrigger: {
-            trigger: ".contact-info-card",
-            start: "top 95%",
-            end: "bottom 95%",
-            toggleActions: "play none none reverse",
-          },
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.2,
-        }
-      );
-      gsap.fromTo(
-        ".contact-form-card",
-        { x: 100, opacity: 0 },
-        {
-          scrollTrigger: {
-            trigger: ".contact-form-card",
-            start: "top 90%",
-            end: "bottom 90%",
-            toggleActions: "play none none reverse",
-            scrub: 1,
-          },
-          x: 0,
-          opacity: 1,
-          duration: 1.2,
-        }
-      );
-    },
-    { scope: containerRef }
-  );
-
   return (
-    <section ref={containerRef} className="w-full min-h-[80vh] bg-[#F7F7F9] py-10 px-2">
+    <section className="w-full min-h-[80vh] bg-[#F7F7F9] py-10 px-2">
       {/* Hero Section */}
-      <div className="contact-hero max-w-4xl mx-auto text-center mb-12">
+      <div className="max-w-4xl mx-auto text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-3">Contact Us</h1>
         <div className="w-24 h-1 bg-primary mx-auto my-2"></div>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
           We're here to help! Reach out for product inquiries, support, or just to say hello. Our team will get back to you as soon as possible.
         </p>
-        <div className="flex justify-center">
-          <Image src="/images/bg-doodle.png" alt="Contact" width={180} height={120} className="rounded-lg shadow-md object-cover" />
-        </div>
       </div>
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
         {/* Contact Info */}
         <div className="space-y-5">
-          <div className="contact-info-card p-6 flex items-start gap-4 bg-white rounded-xl">
+          <div className="p-6 flex items-start gap-4 bg-white rounded-xl">
             <div className="bg-primary rounded-xl p-3">
               <IoCall className="size-6 text-white" />
             </div>
@@ -100,7 +38,7 @@ export default function ContactPage() {
               <div className="text-gray-600">+91 9156261648</div>
             </div>
           </div>
-          <div  className="contact-info-card p-6 flex items-start gap-4 bg-white rounded-xl">
+          <div className="p-6 flex items-start gap-4 bg-white rounded-xl">
             <div className="bg-primary rounded-xl p-3">
               <IoMdMail className="size-6 text-white" />
             </div>
@@ -109,7 +47,7 @@ export default function ContactPage() {
               <div className="text-gray-600">marketing@jeeko.com</div>
             </div>
           </div>
-          <div className="contact-info-card p-6 flex items-start gap-4 bg-white rounded-xl">
+          <div className="p-6 flex items-start gap-4 bg-white rounded-xl">
             <div className="bg-primary rounded-xl p-3">
               <FaRegClock className="size-6 text-white" />
             </div>
@@ -118,7 +56,7 @@ export default function ContactPage() {
               <div className="text-gray-600">09:00 AM - 05:00 PM</div>
             </div>
           </div>
-          <div className="contact-info-card p-6 flex items-start gap-4 bg-white rounded-xl">
+          <div className="p-6 flex items-start gap-4 bg-white rounded-xl">
             <div className="bg-primary rounded-xl p-3">
               <FaLocationDot className="size-6 text-white" />
             </div>
@@ -141,8 +79,9 @@ export default function ContactPage() {
             </Button>
           </a>
         </div>
+        
         {/* Contact Form */}
-        <Card className="contact-form-card p-8 bg-white rounded-xl shadow-md">
+        <Card className="p-8 bg-white rounded-xl shadow-md">
           <h2 className="text-2xl font-bold text-primary mb-4">Send us a message</h2>
           {success && (
             <div className="mb-4 p-3 bg-green-100 text-green-700 rounded-lg text-center">
@@ -209,4 +148,4 @@ export default function ContactPage() {
       </div>
     </section>
   );
-} 
+}

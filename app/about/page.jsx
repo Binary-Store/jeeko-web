@@ -10,6 +10,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaSeedling, FaHandsHelping, FaAward, FaLeaf } from "react-icons/fa";
+import banner from "@/public/images/banners/about.png"
+import banner_mb from "@/public/images/banners/about_mb.png"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,16 +44,24 @@ const timeline = [
 
 const values = [
   {
-    icon: <FaSeedling className="text-primary size-8" />, title: "Innovation", desc: "We constantly innovate to bring the best solutions to Indian agriculture."
+    icon: <FaSeedling className="text-primary w-6 h-6 sm:w-8 sm:h-8" />,
+    title: "Innovation",
+    desc: "We constantly innovate to bring the best solutions to Indian agriculture."
   },
   {
-    icon: <FaHandsHelping className="text-primary size-8" />, title: "Support", desc: "Our team is always ready to help, from purchase to after-sales."
+    icon: <FaHandsHelping className="text-primary w-6 h-6 sm:w-8 sm:h-8" />,
+    title: "Support",
+    desc: "Our team is always ready to help, from purchase to after-sales."
   },
   {
-    icon: <FaAward className="text-primary size-8" />, title: "Quality", desc: "Every product is rigorously tested for reliability and durability."
+    icon: <FaAward className="text-primary w-6 h-6 sm:w-8 sm:h-8" />,
+    title: "Quality",
+    desc: "Every product is rigorously tested for reliability and durability."
   },
   {
-    icon: <FaLeaf className="text-primary size-8" />, title: "Sustainability", desc: "We care for the earth and design products with the future in mind."
+    icon: <FaLeaf className="text-primary w-6 h-6 sm:w-8 sm:h-8" />,
+    title: "Sustainability",
+    desc: "We care for the earth and design products with the future in mind."
   },
 ];
 
@@ -94,37 +104,53 @@ export default function About() {
   );
 
   return (
-    <section ref={containerRef} className="w-full min-h-[80vh] bg-[#F7F7F9] pb-10">
-      {/* Hero Section */}
-      <div className="relative w-full h-[340px] md:h-[420px] flex items-center justify-center bg-primary/90 overflow-hidden mb-16">
-        <Image src="/images/bg-doodle.png" alt="About Hero" fill className="object-cover object-center opacity-10" />
-        <div className="relative z-10 text-center w-full">
-          <div className="flex justify-center mb-4">
-            <Image src="/images/logo.svg" alt="Jeeko Logo" width={120} height={60} className="object-contain" />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 drop-shadow">Empowering Indian Agriculture</h1>
-          <p className="text-lg text-primary-foreground max-w-2xl mx-auto mb-6 drop-shadow">
-            Jeeko Agro Industries is on a mission to deliver innovative, reliable, and sustainable solutions for every Indian farmer.
-          </p>
+    <section ref={containerRef} className="w-full min-h-[80vh] pb-10">
+      <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
+        <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
+          {/* Mobile Image */}
+          <Image
+            src={banner_mb}
+            alt="About Banner Mobile"
+            width={1980}
+            height={709}
+            className="block md:hidden w-full h-auto max-h-[89vh] sm:max-h-[70vh] rounded-2xl object-contain"
+            priority
+          />
+
+          {/* Desktop Image */}
+          <Image
+            src={banner}
+            alt="About Banner Desktop"
+            width={1980}
+            height={709}
+            className="hidden md:block w-full h-auto max-h-[70vh] lg:max-h-[96vh] rounded-2xl object-contain"
+            priority
+          />
         </div>
       </div>
 
       {/* Timeline / Journey */}
-      <div className="about-animate max-w-5xl mx-auto mb-20">
-        <h2 className="text-3xl font-bold text-center mb-8">Our Journey</h2>
-        <div className="flex flex-col gap-8">
+      <div className="about-animate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20">
+        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-6 sm:mb-8">Our Journey</h2>
+        <div className="flex flex-col gap-6 sm:gap-8">
           {timeline.map((item, i) => (
-            <div key={item.year} className={`flex flex-col md:flex-row ${i % 2 === 1 ? 'md:flex-row-reverse' : ''} items-center gap-8`}> 
-              <Card className="flex-1 p-8 bg-white rounded-xl shadow-md">
-                <div className="flex items-center gap-4 mb-2">
-                  <span className="text-primary font-bold text-xl">{item.year}</span>
+            <div key={item.year} className={`flex flex-col lg:flex-row ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''} items-center gap-4 sm:gap-6 lg:gap-8`}>
+              <Card className="flex-1 p-4 sm:p-6 lg:p-8 bg-white rounded-xl shadow-md">
+                <div className="flex items-center gap-4 mb-3">
+                  <span className="text-primary font-bold text-lg sm:text-xl">{item.year}</span>
                   <Separator className="flex-1 bg-primary/30" />
-                  <span className="font-semibold text-lg">{item.title}</span>
+                  <span className="font-semibold text-base sm:text-lg">{item.title}</span>
                 </div>
-                <p className="text-gray-600 mb-2">{item.desc}</p>
+                <p className="text-gray-600 text-sm sm:text-base">{item.desc}</p>
               </Card>
               <div className="flex-shrink-0">
-                <Image src={item.image} alt={item.title} width={90} height={90} className="rounded-lg shadow object-contain bg-[#f5f5f5]" />
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={70}
+                  height={70}
+                  className="rounded-lg shadow object-contain bg-[#f5f5f5] sm:w-[90px] sm:h-[90px]"
+                />
               </div>
             </div>
           ))}
@@ -132,42 +158,52 @@ export default function About() {
       </div>
 
       {/* Our Values */}
-      <div className="about-animate max-w-5xl mx-auto mb-20">
-        <h2 className="text-3xl font-bold text-center mb-8">Our Values</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="about-animate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20">
+        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-6 sm:mb-8">Our Values</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {values.map((v, i) => (
-            <Card key={v.title} className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md text-center gap-3">
+            <Card key={v.title} className="flex flex-col items-center p-4 sm:p-6 bg-white rounded-xl shadow-md text-center gap-3">
               {v.icon}
-              <span className="font-semibold text-lg text-primary">{v.title}</span>
-              <p className="text-gray-600 text-sm">{v.desc}</p>
+              <span className="font-semibold text-base sm:text-lg text-primary">{v.title}</span>
+              <p className="text-gray-600 text-xs sm:text-sm">{v.desc}</p>
             </Card>
           ))}
         </div>
       </div>
 
       {/* Meet Our Brands */}
-      <div className="about-animate max-w-4xl mx-auto mb-20">
-        <h2 className="text-3xl font-bold text-center mb-8">Meet Our Brands</h2>
-        <div className="flex flex-col md:flex-row gap-8 items-center justify-center">
+      <div className="about-animate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20">
+        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-6 sm:mb-8">Meet Our Brands</h2>
+        <div className="flex flex-col md:flex-row gap-6 sm:gap-8 items-center justify-center max-w-4xl mx-auto">
           {brands.map((b) => (
-            <Card key={b.name} className="flex-1 flex flex-col items-center p-8 bg-white rounded-xl shadow-md text-center gap-4">
-              <Image src={b.logo} alt={b.name + ' logo'} width={80} height={80} className="object-contain rounded" />
-              <span className="font-bold text-xl text-primary">{b.name}</span>
-              <p className="text-gray-600 text-sm">{b.desc}</p>
+            <Card key={b.name} className="flex-1 flex flex-col items-center p-6 sm:p-8 bg-white rounded-xl shadow-md text-center gap-4">
+              <Image
+                src={b.logo}
+                alt={b.name + ' logo'}
+                width={70}
+                height={70}
+                className="object-contain rounded sm:w-[80px] sm:h-[80px]"
+              />
+              <span className="font-bold text-lg sm:text-xl text-primary">{b.name}</span>
+              <p className="text-gray-600 text-xs sm:text-sm">{b.desc}</p>
             </Card>
           ))}
         </div>
       </div>
 
       {/* Call to Action */}
-      <div className="about-animate max-w-2xl mx-auto bg-primary/10 p-10 rounded-lg text-center">
-        <h3 className="text-2xl font-semibold mb-4">Ready to Equip Your Farm?</h3>
-        <p className="text-gray-700 mb-6">
-          Contact us today to learn more about our products or to get expert advice on the best solutions for your agricultural needs.
-        </p>
-        <Link href="/contact-us">
-          <Button className="text-lg px-8 py-3">Contact Us</Button>
-        </Link>
+      <div className="about-animate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto bg-primary/10 p-6 sm:p-8 lg:p-10 rounded-lg text-center">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4">Ready to Equip Your Farm?</h3>
+          <p className="text-gray-700 mb-6 text-sm sm:text-base">
+            Contact us today to learn more about our products or to get expert advice on the best solutions for your agricultural needs.
+          </p>
+          <Link href="/contact-us">
+            <Button className="text-base sm:text-lg px-6 sm:px-8 py-2 sm:py-3 w-full sm:w-auto">
+              Contact Us
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   );

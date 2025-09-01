@@ -1,73 +1,248 @@
 "use client";
 
-import data from "@/config/data";
 import { useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useProducts } from "@/hooks/useProducts";
+import banner from "@/public/images/banners/allproduct.png";
+import banner_md from "@/public/images/banners/allProduct_md.png";
 
 export default function Products() {
   const containerRef = useRef();
 
+  // Fetch products from API with better error handling
+  const { 
+    data: productsResponse, 
+    isLoading, 
+    error,
+    refetch 
+  } = useProducts();
+  
+  // Extract products array from API response
+  const products = productsResponse?.data || [];
+
+  // GSAP Animations removed - no more scroll animations
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <section className="w-full mx-auto">
+        {/* Hero Banner - Loading State */}
+        <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
+          <div className="max-w-7xl rounded-2xl bg-gray-200 animate-pulse mx-auto overflow-hidden shadow-lg h-[50vh] sm:h-[60vh] lg:h-[70vh]">
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold">All Products</h2>
+          <div className="w-24 sm:w-32 h-1 bg-primary mx-auto my-4"></div>
+          <div className="flex justify-center mt-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Error state with retry option
+  if (error) {
+    return (
+      <section className="w-full mx-auto">
+        {/* Hero Banner - Error State */}
+        <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
+          <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
+            {/* Mobile Image */}
+            <Image
+              src={banner_md}
+              alt="All Products Banner Mobile"
+              width={1980}
+              height={709}
+              className="block md:hidden w-full h-auto max-h-[50vh] sm:max-h-[60vh] rounded-2xl object-contain"
+              priority
+            />
+
+            {/* Desktop Image */}
+            <Image
+              src={banner}
+              alt="All Products Banner Desktop"
+              width={1980}
+              height={709}
+              className="hidden md:block w-full h-auto max-h-[60vh] lg:max-h-[70vh] rounded-2xl object-contain"
+              priority
+            />
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold">All Products</h2>
+          <div className="w-24 sm:w-32 h-1 bg-primary mx-auto my-4"></div>
+          <div className="text-center mt-12 bg-red-50 border border-red-200 rounded-xl p-8 max-w-md mx-auto">
+            <p className="text-red-600 mb-4">
+              Error loading products: {error?.response?.data?.error || error.message}
+            </p>
+            <div className="space-y-2">
+              <button 
+                onClick={() => refetch()}
+                className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+              >
+                Try Again
+              </button>
+              <p className="text-sm text-gray-500">
+                If the problem persists, please contact support
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // No products state
+  if (!products.length) {
+    return (
+      <section className="w-full mx-auto">
+        {/* Hero Banner - No Products State */}
+        <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
+          <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
+            {/* Mobile Image */}
+            <Image
+              src={banner_md}
+              alt="All Products Banner Mobile"
+              width={1980}
+              height={709}
+              className="block md:hidden w-full h-auto max-h-[50vh] sm:max-h-[60vh] rounded-2xl object-contain"
+              priority
+            />
+
+            {/* Desktop Image */}
+            <Image
+              src={banner}
+              alt="All Products Banner Desktop"
+              width={1980}
+              height={709}
+              className="hidden md:block w-full h-auto max-h-[60vh] lg:max-h-[70vh] rounded-2xl object-contain"
+              priority
+            />
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold">All Products</h2>
+          <div className="w-24 sm:w-32 h-1 bg-primary mx-auto my-4"></div>
+          <div className="text-center mt-12 bg-gray-50 border border-gray-200 rounded-xl p-8 max-w-md mx-auto">
+            <p className="text-gray-600 mb-4">No products available at the moment</p>
+            <p className="text-sm text-gray-500">Please check back later or contact us for more information</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section ref={containerRef} className="w-full mx-auto my-10">
-      <h2 className="products-title text-4xl text-center font-bold">All Products</h2>
-      <div className="w-32 h-1 bg-primary mx-auto my-2"></div>
-      <div className="w-[95%] mx-auto">
-        <div className="grid my-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {data.products.map((product, index) => (
+    <section ref={containerRef} className="w-full min-h-[80vh]">
+      {/* Hero Banner Section - Same pattern as About page */}
+      <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
+        <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
+          {/* Mobile Image */}
+          <Image
+            src={banner}
+            alt="All Products Banner Mobile"
+            width={1980}
+            height={709}
+            className="block md:hidden w-full h-auto max-h-[89vh] sm:max-h-[70vh] rounded-2xl object-contain"
+            priority
+          />
+
+          {/* Desktop Image */}
+          <Image
+            src={banner_md}
+            alt="All Products Banner Desktop"
+            width={1980}
+            height={709}
+            className="hidden md:block w-full h-auto max-h-[70vh] lg:max-h-[96vh] rounded-2xl object-contain"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* Products Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="products-title text-4xl sm:text-5xl font-bold text-center mb-6 sm:mb-8">All Products</h2>
+        <div className="w-24 sm:w-32 h-1 bg-primary mx-auto mb-8 sm:mb-12"></div>
+        
+        <div className="grid my-6 sm:my-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          {products.map((product, index) => (
             <Card
-              key={product.id}
-              className="hover:shadow-lg hover:scale-105 transition-all duration-300 product-card pt-0 md:pt-5"
+              key={product._id}
+              className="hover:shadow-lg hover:scale-105 transition-all duration-300 bg-white"
             >
-              <CardContent>
-                <Link href={`/products/${product.id}`} className="block group focus:outline-none">
-                  <Image
-                    className="mx-auto w-full md:w-2/3 h-40 object-contain group-hover:scale-105 transition-transform"
-                    src={product.image}
-                    alt={product.name}
-                    width={400}
-                    height={400}
-                    quality={100}
-                    priority={index < 4}
-                  />
-                  <div className="md:flex justify-between mt-2">
-                    <h3 className="text-lg font-bold">{product.name}</h3>
-                    <Badge variant="outline">{product.category}</Badge>
+              <CardContent className="p-4 sm:p-6">
+                <Link href={`/products/${product._id}`} className="block group focus:outline-none">
+                  <div className="relative w-full h-40 sm:h-48 mb-3 sm:mb-4 bg-gray-50 rounded-lg flex items-center justify-center overflow-hidden">
+                    <Image
+                      className="object-contain group-hover:scale-105 transition-transform duration-300 p-2"
+                      src={product.images?.[0]?.url || "/images/placeholder-product.png"}
+                      alt={product.images?.[0]?.alt || product.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                      priority={index < 8}
+                      onError={(e) => {
+                        e.target.src = "/images/placeholder-product.png";
+                      }}
+                    />
                   </div>
-                  <p className="text-xs md:text-sm mt-2 text-gray-500">
-                    {product.description}
-                  </p>
-                  <p className="md:text-sm mt-2 text-gray-500">
-                    Price:{" "}
-                    <span className="text-primary text-lg font-bold">
-                      ₹{product.price}
-                    </span>
-                  </p>
+                  <div className="space-y-2">
+                    <h3 className="text-base sm:text-lg font-bold line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
+                      {product.name}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-gray-500 line-clamp-3 min-h-[3rem]">
+                      {product.description}
+                    </p>
+                    <div className="flex items-center justify-between pt-2">
+                      <span className="text-sm text-gray-500">Price:</span>
+                      <span className="text-primary text-lg sm:text-xl font-bold">
+                        ₹{Number(product.price)?.toLocaleString('en-IN') || 'N/A'}
+                      </span>
+                    </div>
+                    {/* Category badges */}
+                    {product.categories && product.categories.length > 0 && (
+                      <div className="flex flex-wrap gap-1 pt-2">
+                        {product.categories.slice(0, 2).map((category, catIndex) => (
+                          <Badge 
+                            key={catIndex} 
+                            variant="secondary" 
+                            className="text-xs px-2 py-1"
+                          >
+                            {typeof category === 'object' ? category.name : category}
+                          </Badge>
+                        ))}
+                        {product.categories.length > 2 && (
+                          <Badge variant="outline" className="text-xs px-2 py-1">
+                            +{product.categories.length - 2} more
+                          </Badge>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </Link>
                 <Button
                   asChild
                   className="mt-4 w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white flex items-center gap-2"
-                  size="lg"
+                  size="sm"
                 >
                   <a
                     href={`https://wa.me/919156261648?text=${encodeURIComponent(
-                      `Hello, I'm interested in the ${product.name}.`
+                      `Hello, I'm interested in the ${product.name}. Could you please provide more details?`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Enquire on WhatsApp"
+                    aria-label={`Enquire about ${product.name} on WhatsApp`}
                   >
-                    <FaWhatsapp className="size-5" /> Enquire on WhatsApp
+                    <FaWhatsapp className="w-4 h-4" /> Enquire on WhatsApp
                   </a>
                 </Button>
               </CardContent>

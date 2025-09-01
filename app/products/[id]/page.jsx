@@ -1,37 +1,196 @@
 "use client";
 
 import { useRouter, useParams } from "next/navigation";
-import data from "@/config/data";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { useState, useRef, useEffect } from "react";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { FaWhatsapp } from "react-icons/fa";
+import { useProduct } from "@/hooks/useProducts";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ProductDetail() {
   const router = useRouter();
   const params = useParams();
   const { id } = params;
-  const product = data.products.find((p) => String(p.id) === String(id));
+  const containerRef = useRef(null);
+  
+  // Fetch product from API
+  const { data: productResponse, isLoading, error } = useProduct(id);
+  
+  const product = productResponse?.data;
+  
+  // Handle gallery images - MongoDB schema uses images array with url property
+  const [gallery, setGallery] = useState(product?.images?.length > 0 
+    ? product.images.map(img => img?.url).filter(url => url)
+    : ["/images/placeholder-product.png"]);
+  
+  // Initialize selectedImg with the first valid image
+  const [selectedImg, setSelectedImg] = useState("/images/placeholder-product.png");
 
-  const gallery = product?.gallery && product.gallery.length > 0 ? product.gallery : [product?.image];
-  const [selectedImg, setSelectedImg] = useState(gallery[0]);
+  // Update gallery and selectedImg when product data is available
+  useEffect(() => {
+    if (product && product.images?.length > 0) {
+      const newGallery = product.images.map(img => img?.url).filter(url => url) || ["/images/placeholder-product.png"];
+      setGallery(newGallery);
+      setSelectedImg(newGallery[0] || "/images/placeholder-product.png");
+    } else {
+      setGallery(["/images/placeholder-product.png"]);
+      setSelectedImg("/images/placeholder-product.png");
+    }
+  }, [product]);
 
-  if (!product) {
+  // GSAP Animations
+  useGSAP(() => {
+    // Header animation (Back link and product title)
+    gsap.fromTo(
+      ".product-header",
+      {
+        y: 40,
+        opacity: 0,
+        scale: 0.9,
+        rotationX: 10,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        rotationX: 0,
+        duration: 1,
+        ease: "elastic.out(1, 0.5)",
+        scrollTrigger: {
+          trigger: ".product-header",
+          start: "top 90%",
+          end: "bottom 75%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Main image animation
+    gsap.fromTo(
+      ".main-image",
+      {
+        y: 60,
+        opacity: 0,
+        scale: 0.85,
+        rotationY: 15,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        rotationY: 0,
+        duration: 0.8,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".main-image",
+          start: "top 85%",
+          end: "bottom 70%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Gallery thumbnails animation
+    gsap.fromTo(
+      ".gallery-thumb",
+      {
+        y: 30,
+        opacity: 0,
+        scale: 0.9,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: "power4.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".gallery",
+          start: "top 85%",
+          end: "bottom 70%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Product details animation
+    gsap.fromTo(
+      ".product-details",
+      {
+        y: 60,
+        opacity: 0,
+        scale: 0.85,
+        rotationY: 15,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        rotationY: 0,
+        duration: 0.8,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".product-details",
+          start: "top 85%",
+          end: "bottom 70%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Hover animation for gallery thumbnails (no reverse)
+    document.querySelectorAll(".gallery-thumb").forEach((thumb) => {
+      const tl = gsap.timeline({ paused: true });
+      tl.to(thumb, {
+        y: -8,
+        scale: 1.02,
+        boxShadow: "0 12px 24px rgba(0,0,0,0.15)",
+        duration: 0.4,
+        ease: "power3.out",
+      });
+
+      thumb.addEventListener("mouseenter", () => tl.play());
+      // No mouseleave event to prevent reverse
+    });
+  }, { scope: containerRef, dependencies: [product, selectedImg] });
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="w-full min-h-[60vh] flex flex-col items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
+        <p className="text-gray-600">Loading product details...</p>
+      </div>
+    );
+  }
+
+  // Error or no product found
+  if (error || !product) {
     return (
       <div className="w-full min-h-[60vh] flex flex-col items-center justify-center">
         <h2 className="text-3xl font-bold mb-4">Product Not Found</h2>
+        <p className="text-gray-600 mb-4">
+          {error?.message || "The product you're looking for doesn't exist."}
+        </p>
         <Button onClick={() => router.back()}>Go Back</Button>
       </div>
     );
   }
 
   return (
-    <section className="w-full mx-auto my-10">
-      <div className="w-[95%] mx-auto max-w-5xl">
-        <Link href="/products" className="text-primary font-bold mb-4 inline-block">&larr; Back to Products</Link>
+    <section ref={containerRef} className="w-full mx-auto my-8">
+      <div className="w-[95%] mx-auto max-w-7xl">
+        <Link href="/products" className="product-header text-primary font-bold mb-4 inline-block">
+          &larr; Back to Products
+        </Link>
         <Card className="p-6 md:p-10 flex flex-col md:flex-row gap-8 bg-white">
           <div className="flex-1 flex flex-col gap-4 items-center">
             <Image
@@ -39,15 +198,21 @@ export default function ProductDetail() {
               alt={product.name}
               width={400}
               height={400}
-              className="rounded-xl object-cover size-72 bg-[#f5f5f5]"
+              className="main-image rounded-xl object-contain size-72 bg-[#f5f5f5]"
+              onError={(e) => {
+                e.target.src = "/images/placeholder-product.png";
+                setSelectedImg("/images/placeholder-product.png");
+              }}
             />
             {gallery.length > 1 && (
-              <div className="flex gap-2 mt-2">
+              <div className="gallery flex gap-2 mt-2">
                 {gallery.map((img, i) => (
                   <button
                     key={i}
                     onClick={() => setSelectedImg(img)}
-                    className={`rounded border object-contain bg-[#f5f5f5] w-20 h-20 p-0.5 transition-all ${selectedImg === img ? 'ring-2 ring-primary border-primary' : 'border-gray-200'}`}
+                    className={`gallery-thumb rounded border object-contain bg-[#f5f5f5] w-20 h-20 p-0.5 transition-all ${
+                      selectedImg === img ? 'ring-2 ring-primary border-primary' : 'border-gray-200'
+                    }`}
                     style={{ outline: 'none' }}
                     aria-label={`Show image ${i + 1}`}
                   >
@@ -57,20 +222,31 @@ export default function ProductDetail() {
                       width={80}
                       height={80}
                       className="rounded object-contain w-full h-full"
+                      onError={(e) => {
+                        e.target.src = "/images/placeholder-product.png";
+                        // Update gallery to replace invalid image
+                        const updatedGallery = [...gallery];
+                        updatedGallery[i] = "/images/placeholder-product.png";
+                        setGallery(updatedGallery);
+                        if (selectedImg === img) {
+                          setSelectedImg("/images/placeholder-product.png");
+                        }
+                      }}
                     />
                   </button>
                 ))}
               </div>
             )}
           </div>
-          <div className="flex-1 flex flex-col gap-4">
-            <div className="flex items-center gap-3">
+          <div className="product-details flex-1 flex flex-col gap-4">
+            <div className="product-header flex items-center gap-3">
               <h1 className="text-3xl font-bold">{product.name}</h1>
-              <Badge variant="outline">{product.category}</Badge>
             </div>
             <p className="text-lg text-gray-500">{product.description}</p>
             <div>
-              <span className="text-primary text-2xl font-bold">₹{product.price}</span>
+              <span className="text-primary text-2xl font-bold">
+                ₹{product.price?.toLocaleString()}
+              </span>
             </div>
             <Button
               asChild
@@ -88,30 +264,23 @@ export default function ProductDetail() {
                 <FaWhatsapp className="size-5" /> Enquire on WhatsApp
               </a>
             </Button>
-            <div>
-              <h2 className="text-xl font-bold mt-6 mb-2">Features</h2>
-              <ul className="list-disc list-inside text-gray-700 space-y-1">
-                {product.features && product.features.map((f, i) => (
-                  <li key={i}>{f}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h2 className="text-xl font-bold mt-6 mb-2">Specifications</h2>
-              <table className="w-full text-left border rounded-xl overflow-hidden bg-gray-50">
-                <tbody>
-                  {product.specs && Object.entries(product.specs).map(([key, value]) => (
-                    <tr key={key} className="border-b last:border-b-0">
-                      <td className="py-2 px-3 font-semibold text-gray-700 w-1/3">{key}</td>
-                      <td className="py-2 px-3 text-gray-600">{value}</td>
-                    </tr>
+            
+            {/* Specifications Section */}
+            {product.specifications && product.specifications.length > 0 && (
+              <div>
+                <h2 className="text-xl font-bold mt-6 mb-2">Specifications</h2>
+                <div className="w-full text-left border rounded-xl overflow-hidden bg-gray-50">
+                  {product.specifications.map((spec, index) => (
+                    <div key={index} className="border-b last:border-b-0 py-2 px-3">
+                      <span className="text-gray-700 text-sm">• {spec}</span>
+                    </div>
                   ))}
-                </tbody>
-              </table>
-            </div>
+                </div>
+              </div>
+            )}
           </div>
         </Card>
       </div>
     </section>
   );
-} 
+}

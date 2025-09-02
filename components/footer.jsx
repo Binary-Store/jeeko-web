@@ -16,37 +16,14 @@ import { Button } from "@/components/ui/button";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const productCategories = [
-  {
-    name: "Tillers",
-    path: "/category/tiller",
-    icon: "/svg/tiller-icon.svg",
-  },
-  {
-    name: "Water Pumps",
-    path: "/category/pumps",
-    icon: "/svg/pump-icon.svg",
-  },
-  {
-    name: "Generators",
-    path: "/category/generator",
-    icon: "/svg/generator-icon.svg",
-  },
-  {
-    name: "Grass Cutters",
-    path: "/category/grass-cutter",
-    icon: "/svg/tiller-icon.svg",
-  },
-];
-
 export default function Footer() {
   const containerRef = useRef();
 
   return (
     <footer ref={containerRef} className="bg-[#F7F7F9] border-t border-gray-200 mt-8 pt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10 pb-8">
-        {/* Brand & Contact */}
-        <div className="footer-section flex flex-col gap-4 sm:gap-5 sm:col-span-2 lg:col-span-1">
+        {/* Brand Section */}
+        <div className="footer-section flex flex-col gap-4 sm:gap-5">
           <Image
             src="/images/logo.svg"
             alt="Jeeko Agro Industries Logo"
@@ -57,35 +34,6 @@ export default function Footer() {
           <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
             Jeeko Agro Industries, a leading manufacturer of high-quality agricultural and farming tools, is dedicated to empowering farmers and agricultural businesses with reliable, innovative, and efficient equipment.
           </p>
-          
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <span className="bg-primary rounded-xl p-2 flex-shrink-0">
-                <IoCall className="text-white w-4 h-4 sm:w-5 sm:h-5" />
-              </span>
-              <span className="text-gray-700 text-xs sm:text-sm">+91 9156261648</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="bg-primary rounded-xl p-2 flex-shrink-0">
-                <IoMdMail className="text-white w-4 h-4 sm:w-5 sm:h-5" />
-              </span>
-              <span className="text-gray-700 text-xs sm:text-sm">marketing@jeeko.com</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="bg-primary rounded-xl p-2 flex-shrink-0">
-                <FaRegClock className="text-white w-4 h-4 sm:w-5 sm:h-5" />
-              </span>
-              <span className="text-gray-700 text-xs sm:text-sm">09:00 AM - 05:00 PM</span>
-            </div>
-            <div className="flex items-start gap-3">
-              <span className="bg-primary rounded-xl p-2 flex-shrink-0 mt-0.5">
-                <FaLocationDot className="text-white w-4 h-4 sm:w-5 sm:h-5" />
-              </span>
-              <span className="text-gray-700 text-xs sm:text-sm leading-relaxed">
-                GAT No. 2022/5, Ambethan Bordara Road, Chakan Road, Chakan, Pune, Maharashtra, 410501
-              </span>
-            </div>
-          </div>
 
           <a
             href="https://wa.me/919426226165?text=Hello, I would like to inquire about your products."
@@ -99,29 +47,41 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* Product Categories */}
+        {/* Contact Information */}
         <div className="footer-section">
-          <h3 className="text-base sm:text-lg font-semibold text-primary mb-3">Product Categories</h3>
+          <h3 className="text-base sm:text-lg font-semibold text-primary mb-3">Contact Info</h3>
           <Separator className="h-0.5 bg-primary mb-4" />
-          <div className="flex flex-col gap-2 sm:gap-3">
-            {productCategories.map((cat) => (
-              <Link
-                key={cat.name}
-                href={cat.path}
-                className="flex items-center gap-3 text-gray-700 hover:text-primary text-xs sm:text-sm transition-colors duration-200"
-              >
-                <Image
-                  src={cat.icon}
-                  alt={cat.name}
-                  quality={80}
-                  height={20}
-                  width={20}
-                  priority
-                  className="rounded-md object-cover flex-shrink-0"
-                />
-                {cat.name}
-              </Link>
-            ))}
+          
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            <div className="flex items-center gap-2">
+              <span className="bg-primary rounded-xl p-2 flex-shrink-0">
+                <IoCall className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+              </span>
+              <span className="text-gray-700 text-xs sm:text-sm">+91 9156261648</span>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <span className="bg-primary rounded-xl p-2 flex-shrink-0">
+                <IoMdMail className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+              </span>
+              <span className="text-gray-700 text-xs sm:text-sm">marketing@jeeko.com</span>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <span className="bg-primary rounded-xl p-2 flex-shrink-0">
+                <FaRegClock className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+              </span>
+              <span className="text-gray-700 text-xs sm:text-sm">09:00 AM - 05:00 PM</span>
+            </div>
+            
+            <div className="flex items-start gap-2">
+              <span className="bg-primary rounded-xl p-2 flex-shrink-0 mt-0.5">
+                <FaLocationDot className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+              </span>
+              <span className="text-gray-700 text-xs sm:text-sm leading-relaxed max-w-xs">
+                GAT No. 2022/5, Ambethan Bordara Road, Chakan Road, Chakan, Pune, Maharashtra, 410501
+              </span>
+            </div>
           </div>
         </div>
 

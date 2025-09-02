@@ -44,8 +44,6 @@ export default function PopularProduct() {
     return "General";
   };
 
-  // All GSAP animations removed
-
   if (isLoading) {
     return (
       <section ref={containerRef} className="w-full mx-auto mb-8">
@@ -104,33 +102,46 @@ export default function PopularProduct() {
           {popularProducts.map((product, index) => (
             <Card
               key={product._id}
-              className="pt-0 md:pt-5 transition-all duration-300 hover:shadow-lg hover:scale-105"
+              className="h-full transition-all duration-300 hover:shadow-lg hover:scale-105"
             >
-              <CardContent>
-                <Image
-                  className="mx-auto w-full md:w-2/3 h-40 object-contain"
-                  src={getProductImageUrl(product)}
-                  alt={getProductImageAlt(product)}
-                  width={400}
-                  height={400}
-                  quality={100}
-                  priority={index < 4}
-                  onError={(e) => {
-                    e.target.src = "/images/placeholder-product.png";
-                  }}
-                />
-                <div className="md:flex justify-between">
-                  <h3 className="text-lg font-bold">{product.name}</h3>
+              <CardContent className="p-4 flex flex-col h-full">
+                {/* Image Container - Fixed height */}
+                <div className="flex-shrink-0 mb-4">
+                  <Image
+                    className="mx-auto w-full h-40 object-contain"
+                    src={getProductImageUrl(product)}
+                    alt={getProductImageAlt(product)}
+                    width={400}
+                    height={400}
+                    quality={100}
+                    priority={index < 4}
+                    onError={(e) => {
+                      e.target.src = "/images/placeholder-product.png";
+                    }}
+                  />
                 </div>
-                <p className="text-xs md:text-sm mt-2 text-gray-500">
-                  {product.description}
-                </p>
-                <p className="md:text-sm mt-2 text-gray-500">
-                  Price:{" "}
-                  <span className="text-primary text-lg font-bold">
-                    ₹{product.price}
-                  </span>
-                </p>
+                
+                {/* Content Container - Flexible height */}
+                <div className="flex flex-col flex-grow">
+                  {/* Product Name */}
+                  <h3 className="text-lg font-bold mb-2 line-clamp-2">
+                    {product.name}
+                  </h3>
+                  
+                  {/* Description - Takes available space */}
+                  <p className="text-xs md:text-sm text-gray-500 flex-grow mb-3 line-clamp-3">
+                    {product.description}
+                  </p>
+                  
+                  {/* Price - Always at bottom */}
+                  <div className="mt-auto">
+                    <p className="text-sm">
+                      <span className="text-primary text-lg font-bold">
+                        ₹{product.price}
+                      </span>
+                    </p>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           ))}

@@ -169,8 +169,8 @@ export default function WhyUs() {
   );
 
   return (
-    <section ref={containerRef} className="w-full mx-auto my-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={containerRef} className="w-full mx-auto my-10  px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold">
           Why Choose <span className="text-primary">JEEKO</span>?
         </h2>

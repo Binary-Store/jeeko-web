@@ -46,7 +46,7 @@ export default function PopularProduct() {
 
   if (isLoading) {
     return (
-      <section ref={containerRef} className="w-full mx-auto mb-8">
+      <section ref={containerRef} className="w-full mb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl text-center font-bold">Popular Products</h2>
           <div className="w-32 h-1 bg-primary mx-auto my-2"></div>
@@ -88,8 +88,8 @@ export default function PopularProduct() {
   }
 
   return (
-    <section ref={containerRef} className="w-full mx-auto mb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={containerRef} className="w-full mx-auto mb-8 px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
+      <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl text-center font-bold">Popular Products</h2>
         <div className="w-32 h-1 bg-primary mx-auto my-2"></div>
         <div className="flex justify-end">

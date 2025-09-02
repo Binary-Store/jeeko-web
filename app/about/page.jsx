@@ -104,8 +104,8 @@ export default function About() {
   );
 
   return (
-    <section ref={containerRef} className="w-full min-h-[80vh] pb-10">
-      <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
+    <section ref={containerRef} className="w-full min-h-[80vh] sm:px-6 lg:px-8 pb-4 sm:pb-8">
+      <div className="w-full pb-10">
         <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
           {/* Mobile Image */}
           <Image
@@ -130,7 +130,7 @@ export default function About() {
       </div>
 
       {/* Timeline / Journey */}
-      <div className="about-animate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20">
+      <div className="about-animate max-w-7xl mx-auto mb-16 sm:mb-20">
         <h2 className="text-4xl sm:text-5xl font-bold text-center mb-6 sm:mb-8">Our Journey</h2>
         <div className="flex flex-col gap-6 sm:gap-8">
           {timeline.map((item, i) => (
@@ -158,7 +158,7 @@ export default function About() {
       </div>
 
       {/* Our Values */}
-      <div className="about-animate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20">
+      <div className="about-animate max-w-7xl mx-auto mb-16 sm:mb-20">
         <h2 className="text-4xl sm:text-5xl font-bold text-center mb-6 sm:mb-8">Our Values</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {values.map((v, i) => (
@@ -172,7 +172,7 @@ export default function About() {
       </div>
 
       {/* Meet Our Brands */}
-      <div className="about-animate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-20">
+      <div className="about-animate max-w-7xl mx-auto mb-16 sm:mb-20">
         <h2 className="text-4xl sm:text-5xl font-bold text-center mb-6 sm:mb-8">Meet Our Brands</h2>
         <div className="flex flex-col md:flex-row gap-6 sm:gap-8 items-center justify-center max-w-4xl mx-auto">
           {brands.map((b) => (
@@ -192,7 +192,7 @@ export default function About() {
       </div>
 
       {/* Call to Action */}
-      <div className="about-animate max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="about-animate max-w-7xl mx-auto">
         <div className="max-w-2xl mx-auto bg-primary/10 p-6 sm:p-8 lg:p-10 rounded-lg text-center">
           <h3 className="text-xl sm:text-2xl font-semibold mb-4">Ready to Equip Your Farm?</h3>
           <p className="text-gray-700 mb-6 text-sm sm:text-base">

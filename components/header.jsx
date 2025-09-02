@@ -94,11 +94,11 @@ export default function Header({ className }) {
 
   return (
     <header className={cn(
-      "fixed top-4 left-4 right-4 p-1 rounded-xl z-50",
+      "fixed top-4 w-full px-4 sm:px-6 lg:px-8 z-50",
       className
     )}>
-      {/* Container with max-w-7xl for content width constraint */}
-      <div className="max-w-7xl mx-auto pl-3 pr-4 rounded-xl bg-white flex justify-between items-center min-h-16">
+      {/* Container with max-w-7xl for content width constraint - exactly same as hero */}
+      <div className="max-w-7xl mx-auto rounded-xl bg-white flex justify-between items-center min-h-16 px-4 sm:px-6">
         <Link href="/">
           <Image src="/images/logo.svg" alt="logo" width={100} height={100} />
         </Link>

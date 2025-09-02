@@ -81,10 +81,10 @@ export default function Hero() {
   );
 
   return (
-    <>
-      {/* Hero Banner Section - Limited width container */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="w-full h-full rounded-xl">
+    <section ref={containerRef} className="w-full  px-4 sm:px-6 lg:px-8 ">
+      {/* Hero Banner Section - Same width structure as About page */}
+      <div className="w-full pb-4 sm:pb-8">
+        <div className="max-w-7xl mx-auto rounded-2xl bg-white overflow-hidden shadow-lg">
           <Carousel
             className="w-full h-full"
             opts={{
@@ -99,19 +99,23 @@ export default function Hero() {
                   className="flex rounded-xl flex-col w-full h-full justify-between items-center"
                 >
                   <div className="bg-white rounded-xl w-full h-full">
+                    {/* Mobile Image */}
                     <Image
                       src={category.image}
                       alt={category.image}
                       width={1980}
                       height={709}
                       className="w-full rounded-xl object-contain block sm:max-h-[85vh] sm:object-cover sm:object-bottom md:hidden"
+                      priority
                     />
+                    {/* Desktop Image */}
                     <Image
                       src={category.image_md}
                       alt={category.image_md}
                       width={1980}
                       height={709}
                       className="w-full rounded-xl object-contain hidden md:block"
+                      priority
                     />
                   </div>
                 </CarouselItem>
@@ -121,34 +125,34 @@ export default function Hero() {
             <CarouselNext className="absolute h-12 w-12 right-4 border-red-600 text-red-600 hover:bg-red-600/20 hover:text-red-600" />
           </Carousel>
         </div>
-      </section>
+      </div>
 
-      {/* Stats Section - Limited width container */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
+      {/* Stats Section - Fixed to match Hero Banner padding exactly */}
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
         <div className="flex col-span-2 py-7 items-center justify-around bg-white rounded-xl">
           <Image
             src="/images/isi-logo.png"
-            alt="iso"
+            alt="ISI certification"
             width={200}
             height={200}
             className="size-20 object-contain"
           />
           <Image
             src="/images/iso-logo.png"
-            alt="iso"
+            alt="ISO certification"
             width={200}
             height={200}
             className="size-20 object-contain"
           />
           <Image
             src="/images/fmtti-logo.png"
-            alt="iso"
+            alt="FMTTI certification"
             width={200}
             height={200}
             className="size-20 object-contain"
           />
         </div>
-        <div className="col-span-1 flex flex-col py-7 gap-5 items-center justify-center bg-white rounded-xl">
+        <div className="col-span-1 flex flex-col py-7 gap-5 items-center justify-center bg-white rounded-xl customer-count">
           <h2
             ref={customerCountRef}
             className="text-primary font-bold text-4xl"
@@ -168,7 +172,7 @@ export default function Hero() {
             <p className="text-sm md:text-base">Years of Experience</p>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

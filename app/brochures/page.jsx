@@ -33,9 +33,9 @@ export default function BrochuresPage() {
   // All GSAP animations removed
 
   return (
-    <section ref={containerRef} className="w-full min-h-[80vh] pb-10">
+    <section ref={containerRef} className="w-full min-h-[80vh] px-4 sm:px-6 lg:px-8 pb-10 sm:pb-10">
       {/* Hero Banner Section - Same pattern as About page */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
+      <div className="w-full pb-10">
         <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
           {/* Mobile Image */}
           <Image
@@ -60,7 +60,7 @@ export default function BrochuresPage() {
       </div>
 
       {/* Content Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         {/* Hero Section - Updated with reduced spacing */}
         <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
           <h1 className="text-4xl sm:text-5xl font-bold text-center mb-4 sm:mb-6">Our Brochures</h1>

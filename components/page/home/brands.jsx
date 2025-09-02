@@ -11,8 +11,8 @@ export default function Brands() {
   // All GSAP animations removed
 
   return (
-    <section ref={containerRef} className="w-full mx-auto my-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={containerRef} className="w-full mx-auto my-10  px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl text-center font-bold">Our Brands</h2>
         <div className="w-32 h-1 bg-primary mx-auto my-2"></div>
 

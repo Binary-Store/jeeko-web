@@ -34,12 +34,11 @@ export default function ProductCategories() {
   // Extract categories array from API response
   const categories = categoriesResponse?.data || [];
 
-  // All GSAP animations removed
-
   // Loading state
   if (isLoading) {
     return (
-      <section ref={sectionRef} className="py-8">
+      <section ref={sectionRef} className="w-full py-8">
+        {/* Same width container structure as Hero */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 ref={headingRef} className="text-4xl text-center font-bold">
             Product Category
@@ -56,7 +55,8 @@ export default function ProductCategories() {
   // Error state
   if (error) {
     return (
-      <section ref={sectionRef} className="py-8">
+      <section ref={sectionRef} className="w-full py-8">
+        {/* Same width container structure as Hero */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 ref={headingRef} className="text-4xl text-center font-bold">
             Product Category
@@ -73,7 +73,8 @@ export default function ProductCategories() {
   // No categories state
   if (!categories.length) {
     return (
-      <section ref={sectionRef} className="py-8">
+      <section ref={sectionRef} className="w-full py-8">
+        {/* Same width container structure as Hero */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 ref={headingRef} className="text-4xl text-center font-bold">
             Product Category
@@ -88,11 +89,12 @@ export default function ProductCategories() {
   }
 
   return (
-    <section ref={sectionRef} className="py-8">
+    <section ref={sectionRef} className="w-full py-8 px-4 sm:px-6 lg:px-8">
       <style jsx global>
         {paginationStyles}
       </style>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Same width container structure as Hero - Perfect match */}
+      <div className="max-w-7xl mx-auto">
         <h2 ref={headingRef} className="text-4xl text-center font-bold">
           Product Category
         </h2>

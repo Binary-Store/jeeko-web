@@ -181,9 +181,9 @@ export default function ProductsContent() {
   }
 
   return (
-    <section ref={containerRef} className="w-full min-h-[80vh]">
+    <section ref={containerRef} className="w-full min-h-[80vh]  px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
       {/* Hero Banner Section - Same pattern as About page */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
+      <div className="w-full pb-10">
         <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
           {/* Mobile Image */}
           <Image
@@ -208,7 +208,7 @@ export default function ProductsContent() {
       </div>
 
       {/* Products Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto ">
         {/* Header with Category Filter */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8 gap-4">
           <div className="text-center sm:text-left">

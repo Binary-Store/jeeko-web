@@ -19,119 +19,153 @@ export default function ContactUs() {
 
   useGSAP(
     () => {
+      // Header animation - matching PopularProduct style
       gsap.fromTo(
         "h2",
         {
-          y: 50,
+          y: 40,
           opacity: 0,
+          scale: 0.9,
+          rotationX: 10,
         },
         {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          rotationX: 0,
+          duration: 1,
+          ease: "elastic.out(1, 0.5)",
           scrollTrigger: {
             trigger: "h2",
             start: "top 90%",
-            end: "200px 90%",
+            end: "bottom 75%",
             toggleActions: "play none none reverse",
           },
-          y: 0,
-          opacity: 1,
-          duration: 2,
         }
       );
 
+      // Contact cards animation - enhanced with 3D effects
       gsap.fromTo(
         ".contact-card",
         {
-          y: 100,
+          y: 60,
           opacity: 0,
+          scale: 0.85,
+          rotationY: 15,
         },
         {
-          scrollTrigger: {
-            trigger: ".contact-card",
-            start: "top 95%",
-            end: "bottom 95%",
-            toggleActions: "play none none reverse",
-            // scrub: 1,
-          },
           y: 0,
           opacity: 1,
-          duration: 1,
-          stagger: 0.2,
+          scale: 1,
+          rotationY: 0,
+          duration: 0.8,
+          ease: "power4.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: ".contact-card",
+            start: "top 85%",
+            end: "bottom 70%",
+            scrub: 0.3,
+          },
         }
       );
 
+      // Contact form animation - enhanced entrance
       gsap.fromTo(
         ".contact-form",
         {
-          y: 100,
+          y: 60,
           opacity: 0,
+          scale: 0.9,
         },
         {
-          scrollTrigger: {
-            trigger: ".contact-form",
-            start: "top 90%",
-            end: "bottom 90%",
-            toggleActions: "play none none reverse",
-            scrub: 1,
-          },
           y: 0,
           opacity: 1,
-          duration: 1.5,
+          scale: 1,
+          duration: 1,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: ".contact-form",
+            start: "top 85%",
+            end: "bottom 70%",
+            scrub: 0.3,
+          },
         }
       );
+
+      // Hover animation for contact cards
+      document.querySelectorAll(".contact-card").forEach((card) => {
+        const tl = gsap.timeline({ paused: true });
+        tl.to(card, {
+          y: -8,
+          scale: 1.02,
+          boxShadow: "0 12px 24px rgba(0,0,0,0.15)",
+          duration: 0.4,
+          ease: "power3.out",
+        });
+
+        card.addEventListener("mouseenter", () => tl.play());
+        card.addEventListener("mouseleave", () => tl.reverse());
+      });
     },
     { scope: containerRef }
   );
 
   return (
     <div ref={containerRef} className="bg-primary w-full py-10">
-      <div className="w-[95%] mx-auto flex flex-col md:flex-row items-center gap-12">
-        <div className="w-full">
-          <h2 className="text-4xl font-bold text-white">Get in touch</h2>
-          <h3 className="text-white text-xl"> We're Here to Help</h3>
-          <p className="text-white text-sm mt-2">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
+        {/* Contact Information Section */}
+        <div className="w-full lg:w-1/2">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Get in touch</h2>
+          <h3 className="text-white text-lg sm:text-xl mb-2"> We're Here to Help</h3>
+          <p className="text-white text-sm sm:text-base mt-2 mb-6 leading-relaxed">
             If you have any questions, concerns, or feedback, we're here to
             assist you. Our team is dedicated to providing support and ensuring
             your experience is smooth and hassle-free. Don't hesitate to reach
             out to us—we'd love to hear from you!
           </p>
-          <div className="bg-[#EAEAEA] rounded-xl p-7 mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl contact-card">
-              <div className="bg-primary rounded-xl p-3">
-                <IoCall className="size-5 text-white" />
+          
+          <div className="bg-gray-100 rounded-xl p-4 sm:p-6 grid grid-cols-1 gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full bg-white p-3 sm:p-4 rounded-xl contact-card shadow-sm">
+              <div className="bg-primary rounded-xl p-2 sm:p-3 flex-shrink-0">
+                <IoCall className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div>
-                <div className="text-2xl ps-font-orbitron font-bold">
+              <div className="flex-1">
+                <div className="text-lg sm:text-xl font-bold">
                   Call Us
                 </div>
                 <div className="text-sm sm:text-base">+91 9156261648</div>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl contact-card">
-              <div className="bg-primary rounded-xl p-3 ">
-                <FaRegClock className="size-5 text-white" />
+            
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full bg-white p-3 sm:p-4 rounded-xl contact-card shadow-sm">
+              <div className="bg-primary rounded-xl p-2 sm:p-3 flex-shrink-0">
+                <FaRegClock className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div>
-                <div className="text-2xl ps-font-orbitron font-bold">
-                  Operasional
+              <div className="flex-1">
+                <div className="text-lg sm:text-xl font-bold">
+                  Operational
                 </div>
                 <div className="text-sm sm:text-base">09:00 AM - 05:00 PM</div>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl contact-card">
-              <div className="bg-primary rounded-xl p-3 ">
-                <IoMdMail className="size-5 text-white" />
+            
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full bg-white p-3 sm:p-4 rounded-xl contact-card shadow-sm">
+              <div className="bg-primary rounded-xl p-2 sm:p-3 flex-shrink-0">
+                <IoMdMail className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div>
-                <div className="text-2xl ps-font-orbitron font-bold">Email</div>
+              <div className="flex-1">
+                <div className="text-lg sm:text-xl font-bold">Email</div>
                 <div className="text-sm sm:text-base">marketing@jeeko.com</div>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row items-start gap-3 w-full md:items-center bg-white p-4 rounded-xl contact-card">
-              <div className="bg-primary rounded-xl p-3 ">
-                <FaLocationDot className="size-5 text-white" />
+            
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full bg-white p-3 sm:p-4 rounded-xl contact-card shadow-sm">
+              <div className="bg-primary rounded-xl p-2 sm:p-3 flex-shrink-0">
+                <FaLocationDot className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div>
-                <div className="text-2xl ps-font-orbitron font-bold">
+              <div className="flex-1">
+                <div className="text-lg sm:text-xl font-bold">
                   Location
                 </div>
                 <div className="text-sm sm:text-base">
@@ -142,12 +176,14 @@ export default function ContactUs() {
             </div>
           </div>
         </div>
-        <div className="w-full md:w-3/4">
-          <div className="bg-white rounded-xl p-7 contact-form">
-            <h2 className="text-2xl font-bold text-primary mb-4">
+        
+        {/* Contact Form Section */}
+        <div className="w-full lg:w-1/2">
+          <div className="bg-white rounded-xl p-4 sm:p-6 lg:p-8 contact-form shadow-lg">
+            <h2 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6">
               Send us a message
             </h2>
-            <form className="space-y-4">
+            <form className="space-y-4 sm:space-y-6">
               <div className="space-y-2">
                 <label
                   htmlFor="name"
@@ -160,6 +196,7 @@ export default function ContactUs() {
                   id="name"
                   name="name"
                   placeholder="Enter your full name"
+                  className="w-full"
                   required
                 />
               </div>
@@ -175,6 +212,7 @@ export default function ContactUs() {
                   id="phone"
                   name="phone"
                   placeholder="Enter your phone number"
+                  className="w-full"
                   required
                 />
               </div>
@@ -186,10 +224,11 @@ export default function ContactUs() {
                   Subject
                 </label>
                 <Input
-                  type="tel"
+                  type="text"
                   id="subject"
                   name="subject"
                   placeholder="Enter your subject"
+                  className="w-full"
                   required
                 />
               </div>
@@ -204,6 +243,7 @@ export default function ContactUs() {
                   id="message"
                   name="message"
                   placeholder="Enter your message"
+                  className="w-full min-h-[120px]"
                   required
                 />
               </div>

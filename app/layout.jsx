@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import CustomCursor from "@/components/CustomCursor";
+import LayoutWrapper from "@/components/LayoutWrapper";
+import { QueryProvider } from "@/provider/QueryClientProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,12 +22,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased  bg-[#EAEAEA] w-screen overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#EAEAEA] w-screen overflow-x-hidden`}
       >
-        <CustomCursor />
-        <Header />
-        {children}
-        <Footer />
+        <QueryProvider>
+          <LayoutWrapper>
+            {children}
+          </LayoutWrapper>
+        </QueryProvider>
       </body>
     </html>
   );

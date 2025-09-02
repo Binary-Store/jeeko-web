@@ -4,17 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
-// Register ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
+import { useProductCategories } from "@/hooks/useProductCategories";
 
 // Add custom styles for pagination bullets
 const paginationStyles = `
@@ -28,113 +23,80 @@ const paginationStyles = `
   }
 `;
 
-const categories = [
-  {
-    name: "Tiller",
-    image: "/images/category/tiller.png",
-    href: "/category/tiller",
-  },
-  {
-    name: "Hand tools",
-    image: "/images/category/hand-tools.png",
-    href: "/category/hand-tools",
-  },
-  {
-    name: "Generator",
-    image: "/images/category/generator.jpg",
-    href: "/category/generator",
-  },
-  {
-    name: "Pumps",
-    image: "/images/category/pump.jpg",
-    href: "/category/pumps",
-  },
-  {
-    name: "Grass Cutter",
-    image: "/images/category/grass-cutter.png",
-    href: "/category/grass-cutter",
-  },
-];
-
 export default function ProductCategories() {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const sliderRef = useRef(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate the heading
-      gsap.fromTo(
-        headingRef.current,
-        {
-          opacity: 0,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: headingRef.current,
-            start: "top 80%",
-            end: "top 50%",
-            scrub: 1,
-          },
-        }
-      );
+  // Fetch categories from API
+  const { data: categoriesResponse, isLoading, error } = useProductCategories();
+  
+  // Extract categories array from API response
+  const categories = categoriesResponse?.data || [];
 
-      // Animate the red line
-      gsap.fromTo(
-        ".red-line",
-        {
-          scaleX: 0,
-        },
-        {
-          scaleX: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: ".red-line",
-            start: "top 80%",
-            end: "top 50%",
-            scrub: 1,
-          },
-        }
-      );
+  // All GSAP animations removed
 
-      // Animate the slider
-      gsap.fromTo(
-        sliderRef.current,
-        {
-          opacity: 0,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: sliderRef.current,
-            start: "top 80%",
-            end: "top 50%",
-            scrub: 1,
-          },
-        }
-      );
-    }, sectionRef);
+  // Loading state
+  if (isLoading) {
+    return (
+      <section ref={sectionRef} className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 ref={headingRef} className="text-4xl text-center font-bold">
+            Product Category
+          </h2>
+          <div className="red-line w-32 h-1 bg-red-600 mx-auto my-6"></div>
+          <div className="mt-12 flex justify-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-    return () => ctx.revert();
-  }, []);
+  // Error state
+  if (error) {
+    return (
+      <section ref={sectionRef} className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 ref={headingRef} className="text-4xl text-center font-bold">
+            Product Category
+          </h2>
+          <div className="red-line w-32 h-1 bg-red-600 mx-auto my-6"></div>
+          <div className="mt-12 text-center text-red-600">
+            Error loading categories: {error.message}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // No categories state
+  if (!categories.length) {
+    return (
+      <section ref={sectionRef} className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 ref={headingRef} className="text-4xl text-center font-bold">
+            Product Category
+          </h2>
+          <div className="red-line w-32 h-1 bg-red-600 mx-auto my-6"></div>
+          <div className="mt-12 text-center text-gray-600">
+            No categories available
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={sectionRef} className="py-8">
       <style jsx global>
         {paginationStyles}
       </style>
-      <div className="w-[95%] mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 ref={headingRef} className="text-4xl text-center font-bold">
           Product Category
         </h2>
-        <div className="red-line w-32 h-1 bg-red-600 mx-auto my-6 transform origin-left"></div>
+        <div className="red-line w-32 h-1 bg-red-600 mx-auto my-2"></div>
 
         <div ref={sliderRef} className="mt-12">
           <Swiper
@@ -169,24 +131,25 @@ export default function ProductCategories() {
             className="product-categories-slider !pb-12"
           >
             {categories.map((category, index) => (
-              <SwiperSlide key={index}>
-                <Link href={category.href} className="block">
-                  <div className="bg-white rounded-lg p-7 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center justify-center min-h-[280px] relative group">
-                    <div className="relative w-56 h-56 mb-6 group-hover:scale-105 transition-transform duration-300">
+              <SwiperSlide key={category._id || category.id || index}>
+                <Link href={`/category/${category._id || category.id}`} className="block">
+                  <div className="bg-white rounded-lg p-6 shadow-sm transition-all duration-300 flex flex-col items-center justify-center min-h-[240px] relative group hover:shadow-lg hover:transform hover:scale-105">
+                    <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mb-4 transition-transform duration-300">
                       <Image
-                        src={category.image}
+                        src={category.image || "/images/placeholder-category.png"}
                         alt={category.name}
-                        quality={100}
-                        width={224}
-                        height={224}
-                        priority={index < 4}
-                        className="object-cover w-full h-full"
+                        fill
+                        sizes="(max-width: 640px) 128px, (max-width: 768px) 144px, 160px"
+                        className="object-contain rounded-lg"
+                        onError={(e) => {
+                          e.target.src = "/images/placeholder-category.png";
+                        }}
                       />
                     </div>
-                    <h3 className="text-2xl font-bold text-primary text-center group-hover:text-red-600 transition-colors duration-300">
+                    <h3 className="text-xl md:text-2xl font-bold text-primary text-center transition-colors duration-300 px-2">
                       {category.name}
                     </h3>
-                    <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                    <div className="absolute bottom-0 left-0 w-full h-1 bg-red-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-b-lg" />
                   </div>
                 </Link>
               </SwiperSlide>

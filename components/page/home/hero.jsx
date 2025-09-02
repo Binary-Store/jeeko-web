@@ -82,7 +82,8 @@ export default function Hero() {
 
   return (
     <>
-      <section className="app-container mx-auto">
+      {/* Hero Banner Section - Limited width container */}
+      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="w-full h-full rounded-xl">
           <Carousel
             className="w-full h-full"
@@ -121,28 +122,30 @@ export default function Hero() {
           </Carousel>
         </div>
       </section>
-      <section className="app-container grid grid-cols-2 md:grid-cols-4 gap-4 w-full mx-auto my-4">
+
+      {/* Stats Section - Limited width container */}
+      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
         <div className="flex col-span-2 py-7 items-center justify-around bg-white rounded-xl">
           <Image
             src="/images/isi-logo.png"
             alt="iso"
             width={200}
             height={200}
-            className=" size-20 object-contain"
+            className="size-20 object-contain"
           />
           <Image
             src="/images/iso-logo.png"
             alt="iso"
             width={200}
             height={200}
-            className=" size-20 object-contain"
+            className="size-20 object-contain"
           />
           <Image
             src="/images/fmtti-logo.png"
             alt="iso"
             width={200}
             height={200}
-            className=" size-20 object-contain"
+            className="size-20 object-contain"
           />
         </div>
         <div className="col-span-1 flex flex-col py-7 gap-5 items-center justify-center bg-white rounded-xl">

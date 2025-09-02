@@ -127,7 +127,7 @@ export default function ProductCategoryListPage() {
 
     return (
         <div className="container mx-auto px-0 max-w-full">
-            <div className="space-y-6 px-4 md:px-6">
+            <div className="space-y-6">
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div>

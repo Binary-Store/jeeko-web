@@ -22,15 +22,15 @@ gsap.registerPlugin(ScrollTrigger, TextPlugin);
 const banner = [
   {
     image: "/images/banners/banner-1-sm.webp",
-    image_md: "/images/banners/banner-1.webp",
+    image_md: "/images/banners/banner_1.png",
   },
   {
     image: "/images/banners/banner-2-sm.webp",
-    image_md: "/images/banners/banner-2.webp",
+    image_md: "/images/banners/banner_2.png",
   },
   {
     image: "/images/banners/banner-3-sm.webp",
-    image_md: "/images/banners/banner-3.webp",
+    image_md: "/images/banners/banner_3.png",
   },
 ];
 

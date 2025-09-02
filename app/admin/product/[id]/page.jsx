@@ -17,6 +17,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { FaIndianRupeeSign } from 'react-icons/fa6'
 
 export default function ProductDetailPage({ params }) {
     const { id } = use(params)
@@ -186,26 +187,28 @@ export default function ProductDetailPage({ params }) {
                             
                             {/* Image Thumbnails */}
                             {product.images.length > 1 && (
-                                <div className="flex space-x-2 overflow-x-auto pb-2">
-                                    {product.images.map((image, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => setCurrentImageIndex(index)}
-                                            className={`flex-shrink-0 relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                                                index === currentImageIndex 
-                                                    ? 'border-red-500 scale-105' 
-                                                    : 'border-gray-200 hover:border-gray-300'
-                                            }`}
-                                        >
-                                            <Image
-                                                src={image.url}
-                                                alt={`${product.name} - ${index + 1}`}
-                                                fill
-                                                className="object-contain p-1"
-                                                unoptimized={true}
-                                            />
-                                        </button>
-                                    ))}
+                                <div className="px-2 pl-3">
+                                    <div className="flex space-x-3 overflow-x-auto pb-2">
+                                        {product.images.map((image, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() => setCurrentImageIndex(index)}
+                                                className={`flex-shrink-0 relative w-20 h-20 rounded-lg overflow-hidden border-1 transition-all ${
+                                                    index === currentImageIndex 
+                                                        ? 'scale-105' 
+                                                        : 'border-gray-200 hover:border-gray-300'
+                                                }`}
+                                            >
+                                                <Image
+                                                    src={image.url}
+                                                    alt={`${product.name} - ${index + 1}`}
+                                                    fill
+                                                    className="object-contain p-1"
+                                                    unoptimized={true}
+                                                />
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -266,7 +269,7 @@ export default function ProductDetailPage({ params }) {
                             {/* Price */}
                             <div className="mb-6 p-4 bg-green-50 rounded-lg">
                                 <div className="flex items-center justify-center">
-                                    <FiDollarSign className="w-6 h-6 text-green-600 mr-1" />
+                                     <FaIndianRupeeSign className="w-4 h-4 text-green-600 mr-1" />
                                     <span className="text-3xl font-bold text-green-600">
                                         {product.price}
                                     </span>
@@ -293,7 +296,6 @@ export default function ProductDetailPage({ params }) {
                                 </div>
                             )}
                         </div>
-
                     </div>
                 </div>
             </div>

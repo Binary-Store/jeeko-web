@@ -49,6 +49,11 @@ const Sidebar = () => {
       href: '/admin/product',
       label: 'Product',
       icon: <FiPackage className="w-5 h-5" />
+    },
+     {
+      href: '/admin/inquiry',
+      label: 'Inquiry',
+      icon: <FiUser className="w-5 h-5" />
     }
   ]
 

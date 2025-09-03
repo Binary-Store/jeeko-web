@@ -18,6 +18,100 @@ import { FaWhatsapp } from "react-icons/fa";
 import { useProductCategory } from "@/hooks/useProductCategories";
 import { useProducts } from "@/hooks/useProducts";
 
+// Skeleton Loading Component
+function CategoriesDetailSkeleton() {
+  return (
+    <div className="min-h-screen text-black">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 py-8">
+        {/* Back Navigation Skeleton */}
+        <div className="flex items-center gap-2 mb-10">
+          <div className="h-4 w-4 bg-gray-200 animate-pulse rounded"></div>
+          <div className="h-5 bg-gray-200 animate-pulse rounded w-32"></div>
+        </div>
+
+        {/* Category Header Skeleton */}
+        <div className="bg-gray-50 rounded-xl shadow-lg p-6 sm:p-8 mb-12 border border-gray-200">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Image Skeleton */}
+            <div className="w-full lg:w-1/3">
+              <div className="aspect-square bg-gray-200 rounded-xl animate-pulse"></div>
+            </div>
+
+            {/* Content Skeleton */}
+            <div className="w-full lg:w-2/3 space-y-4 sm:space-y-6">
+              {/* Title Skeleton */}
+              <div className="h-8 sm:h-10 lg:h-12 bg-gray-200 animate-pulse rounded w-3/4"></div>
+              
+              {/* Description Skeleton */}
+              <div className="space-y-2">
+                <div className="h-5 bg-gray-200 animate-pulse rounded"></div>
+                <div className="h-5 bg-gray-200 animate-pulse rounded"></div>
+                <div className="h-5 bg-gray-200 animate-pulse rounded w-2/3"></div>
+              </div>
+
+              {/* Badge Skeleton */}
+              <div className="flex gap-3">
+                <div className="h-8 bg-gray-200 animate-pulse rounded-full w-24"></div>
+              </div>
+
+              {/* Button Skeleton */}
+              <div className="h-12 bg-gray-200 animate-pulse rounded-lg w-full sm:w-64"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Products Section Skeleton */}
+        <div className="space-y-8">
+          {/* Section Header Skeleton */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="space-y-2">
+              <div className="h-8 sm:h-10 bg-gray-200 animate-pulse rounded w-80"></div>
+              <div className="h-4 bg-gray-200 animate-pulse rounded w-48"></div>
+            </div>
+
+            {/* View Toggle Skeleton */}
+            <div className="flex items-center gap-2 bg-gray-100 rounded-xl p-2 border border-gray-200">
+              <div className="h-8 w-10 bg-gray-200 animate-pulse rounded-lg"></div>
+              <div className="h-8 w-10 bg-gray-200 animate-pulse rounded-lg"></div>
+            </div>
+          </div>
+
+          {/* Products Grid Skeleton */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+            {[...Array(8)].map((_, index) => (
+              <Card key={index} className="bg-white border-2 border-gray-200 rounded-xl shadow-lg">
+                {/* Product Image Skeleton */}
+                <div className="relative bg-gray-200 rounded-t-xl w-full h-40 sm:h-48 animate-pulse"></div>
+
+                {/* Product Info Skeleton */}
+                <CardContent className="p-4 sm:p-6">
+                  {/* Title Skeleton */}
+                  <div className="space-y-1 mb-3">
+                    <div className="h-4 sm:h-5 bg-gray-200 animate-pulse rounded"></div>
+                    <div className="h-4 sm:h-5 bg-gray-200 animate-pulse rounded w-3/4"></div>
+                  </div>
+                  
+                  {/* Description Skeleton */}
+                  <div className="space-y-1 mb-4">
+                    <div className="h-3 sm:h-4 bg-gray-200 animate-pulse rounded"></div>
+                    <div className="h-3 sm:h-4 bg-gray-200 animate-pulse rounded w-2/3"></div>
+                  </div>
+                  
+                  {/* Price and View Badge Skeleton */}
+                  <div className="flex items-center justify-between">
+                    <div className="h-6 sm:h-7 bg-gray-200 animate-pulse rounded w-20"></div>
+                    <div className="h-6 bg-gray-200 animate-pulse rounded-full w-16"></div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function CategoriesDetail() {
   const router = useRouter();
   const params = useParams();
@@ -37,12 +131,9 @@ export default function CategoriesDetail() {
     });
   }, [allProducts, id]);
 
+  // Show skeleton during loading
   if (categoryLoading || productsLoading) {
-    return (
-      <div className="fixed inset-0 bg-white flex items-center justify-center">
-        <div className="text-red-600 text-xl">Loading...</div>
-      </div>
-    );
+    return <CategoriesDetailSkeleton />;
   }
 
   if (categoryError || !category) {
@@ -60,7 +151,6 @@ export default function CategoriesDetail() {
 
   return (
     <div className="min-h-screen text-black">
-      {/* Increased side padding: px-6 sm:px-8 lg:px-12 xl:px-16 */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 py-8">
         {/* Back Navigation */}
         <Link 

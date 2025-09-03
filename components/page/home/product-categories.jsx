@@ -23,40 +23,65 @@ const paginationStyles = `
   }
 `;
 
+// Skeleton Component
+function ProductCategoriesSkeleton() {
+  return (
+    <section className="w-full py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Title skeleton */}
+        <div className="text-center">
+          <div className="h-10 bg-gray-200 rounded-lg w-80 mx-auto animate-pulse"></div>
+        </div>
+        
+        {/* Red line skeleton */}
+        <div className="w-32 h-1 bg-gray-200 mx-auto my-2 animate-pulse rounded"></div>
+
+        {/* Cards skeleton */}
+        <div className="mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {/* Generate 8 skeleton cards */}
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="bg-white rounded-lg p-6 shadow-sm min-h-[240px] flex flex-col items-center justify-center">
+                {/* Image skeleton */}
+                <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mb-4">
+                  <div className="w-full h-full bg-gray-200 rounded-lg animate-pulse"></div>
+                </div>
+                
+                {/* Title skeleton */}
+                <div className="w-24 h-6 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Pagination dots skeleton */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {[...Array(3)].map((_, index) => (
+              <div key={index} className="w-3 h-3 bg-gray-200 rounded-full animate-pulse"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function ProductCategories() {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const sliderRef = useRef(null);
 
-  // Fetch categories from API
   const { data: categoriesResponse, isLoading, error } = useProductCategories();
   
-  // Extract categories array from API response
   const categories = categoriesResponse?.data || [];
 
-  // Loading state
+  // Show skeleton during loading
   if (isLoading) {
-    return (
-      <section ref={sectionRef} className="w-full py-8">
-        {/* Same width container structure as Hero */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 ref={headingRef} className="text-4xl text-center font-bold">
-            Product Category
-          </h2>
-          <div className="red-line w-32 h-1 bg-red-600 mx-auto my-6"></div>
-          <div className="mt-12 flex justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
-          </div>
-        </div>
-      </section>
-    );
+    return <ProductCategoriesSkeleton />;
   }
 
-  // Error state
   if (error) {
     return (
       <section ref={sectionRef} className="w-full py-8">
-        {/* Same width container structure as Hero */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 ref={headingRef} className="text-4xl text-center font-bold">
             Product Category
@@ -74,7 +99,6 @@ export default function ProductCategories() {
   if (!categories.length) {
     return (
       <section ref={sectionRef} className="w-full py-8">
-        {/* Same width container structure as Hero */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 ref={headingRef} className="text-4xl text-center font-bold">
             Product Category

@@ -27,7 +27,7 @@ const ListItem = React.forwardRef(({ className, title, children, ...props }, ref
   return (
     <li>
       <NavigationMenuLink asChild>
-        <a
+        <Link
           ref={ref}
           className={cn(
             "block py-2 px-3 rounded-lg hover:bg-gray-50 text-sm text-gray-600 transition-all duration-200 transform hover:translate-x-1 select-none no-underline outline-none",
@@ -36,7 +36,7 @@ const ListItem = React.forwardRef(({ className, title, children, ...props }, ref
           {...props}
         >
           {title}
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   )
@@ -46,6 +46,9 @@ ListItem.displayName = "ListItem"
 export default function Header({ className }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
+  
+  // Flag to track if animation has already played
+  const animationPlayed = useRef(false);
 
   // Fetch product categories for the dropdown
   const { data: categoriesResponse, isLoading: categoriesLoading } = useProductCategories();
@@ -71,25 +74,31 @@ export default function Header({ className }) {
   }, [mobileMenuOpen]);
 
   useGSAP(() => {
-    const tl = gsap.timeline();
+    // Only run animation if it hasn't played before
+    if (!animationPlayed.current) {
+      const tl = gsap.timeline();
 
-    tl.fromTo(
-      "header",
-      { opacity: 0, y: -100 },
-      { opacity: 1, y: 0, duration: 0.5 }
-    );
+      tl.fromTo(
+        "header",
+        { opacity: 0, y: -100 },
+        { opacity: 1, y: 0, duration: 0.5 }
+      );
 
-    tl.fromTo(
-      "header > div > a",
-      { opacity: 0, y: -100 },
-      { opacity: 1, y: 0, duration: 0.5 }
-    );
+      tl.fromTo(
+        "header > div > a",
+        { opacity: 0, y: -100 },
+        { opacity: 1, y: 0, duration: 0.5 }
+      );
 
-    tl.fromTo(
-      "header .nav-item",
-      { opacity: 0, y: -100 },
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }
-    );
+      tl.fromTo(
+        "header .nav-item",
+        { opacity: 0, y: -100 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }
+      );
+
+      // Mark animation as played
+      animationPlayed.current = true;
+    }
   });
 
   return (
@@ -108,22 +117,22 @@ export default function Header({ className }) {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "nav-item")} href="/">
-                  Home
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "nav-item")} asChild>
+                  <Link href="/">Home</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "nav-item")} href="/about">
-                  About us
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "nav-item")} asChild>
+                  <Link href="/about">About us</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               
               {/* Products with Category Dropdown */}
               <NavigationMenuItem className="nav-item">
                 <NavigationMenuTrigger className="nav-item">
-                  <a href="/products" className="no-underline">
+                  <Link href="/products" className="no-underline">
                     Products
-                  </a>
+                  </Link>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <div className="w-64 bg-white rounded-md border border-gray-100 p-4 max-h-[70vh] overflow-y-auto">
@@ -173,8 +182,8 @@ export default function Header({ className }) {
               </NavigationMenuItem>
               
               <NavigationMenuItem className="nav-item">
-                <NavigationMenuLink className={cn(navigationMenuTriggerStyle())} href="/brochures">
-                  Brochures
+                <NavigationMenuLink className={cn(navigationMenuTriggerStyle())} asChild>
+                  <Link href="/brochures">Brochures</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>

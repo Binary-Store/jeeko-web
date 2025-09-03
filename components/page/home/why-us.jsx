@@ -75,7 +75,7 @@ export default function WhyUs() {
             trigger: "h2",
             start: "top 90%",
             end: "bottom 75%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         }
       );
@@ -96,7 +96,7 @@ export default function WhyUs() {
             trigger: ".underline",
             start: "top 90%",
             end: "bottom 75%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         }
       );
@@ -122,7 +122,7 @@ export default function WhyUs() {
             trigger: ".point-card",
             start: "top 85%",
             end: "bottom 70%",
-            scrub: 0.3,
+            toggleActions: "play none none none",
           },
         }
       );
@@ -145,7 +145,7 @@ export default function WhyUs() {
             trigger: ".banner-image",
             start: "top 85%",
             end: "bottom 70%",
-            scrub: 0.3,
+            toggleActions: "play none none none",
           },
         }
       );
@@ -162,7 +162,7 @@ export default function WhyUs() {
         });
 
         card.addEventListener("mouseenter", () => tl.play());
-        card.addEventListener("mouseleave", () => tl.reverse());
+        // Removed mouseleave event to prevent reverse animation
       });
     },
     { scope: containerRef }

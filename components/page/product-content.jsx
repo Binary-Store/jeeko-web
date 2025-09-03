@@ -1,4 +1,3 @@
-// components/ProductsContent.jsx
 "use client";
 
 import { useRef, useState, useMemo, useEffect } from "react";

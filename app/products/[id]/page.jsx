@@ -14,6 +14,66 @@ import { useProduct } from "@/hooks/useProducts";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Skeleton Loading Component
+function ProductDetailSkeleton() {
+  return (
+    <section className="w-full mx-auto my-8">
+      <div className="w-[95%] mx-auto max-w-7xl">
+        {/* Back link skeleton */}
+        <div className="h-6 bg-gray-200 animate-pulse rounded mb-4 w-32"></div>
+        
+        <Card className="p-6 md:p-10 flex flex-col md:flex-row gap-8 bg-white">
+          {/* Image section skeleton */}
+          <div className="flex-1 flex flex-col gap-4 items-center">
+            {/* Main image skeleton */}
+            <div className="rounded-xl bg-gray-200 animate-pulse size-72"></div>
+            
+            {/* Gallery thumbnails skeleton */}
+            <div className="flex gap-2 mt-2">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="rounded border bg-gray-200 animate-pulse w-20 h-20"></div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Product details skeleton */}
+          <div className="flex-1 flex flex-col gap-4">
+            {/* Title skeleton */}
+            <div className="flex items-center gap-3">
+              <div className="h-9 bg-gray-200 animate-pulse rounded w-3/4"></div>
+            </div>
+            
+            {/* Description skeleton */}
+            <div className="space-y-2">
+              <div className="h-5 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-5 bg-gray-200 animate-pulse rounded"></div>
+              <div className="h-5 bg-gray-200 animate-pulse rounded w-2/3"></div>
+            </div>
+            
+            {/* Price skeleton */}
+            <div className="h-8 bg-gray-200 animate-pulse rounded w-32"></div>
+            
+            {/* WhatsApp button skeleton */}
+            <div className="h-12 bg-gray-200 animate-pulse rounded w-full md:w-64 mt-2"></div>
+            
+            {/* Specifications section skeleton */}
+            <div className="mt-6">
+              <div className="h-7 bg-gray-200 animate-pulse rounded w-40 mb-2"></div>
+              <div className="border rounded-xl overflow-hidden bg-gray-50">
+                {[...Array(5)].map((_, index) => (
+                  <div key={index} className="border-b last:border-b-0 py-2 px-3">
+                    <div className="h-4 bg-gray-200 animate-pulse rounded w-full"></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </section>
+  );
+}
+
 export default function ProductDetail() {
   const router = useRouter();
   const params = useParams();
@@ -162,14 +222,9 @@ export default function ProductDetail() {
     });
   }, { scope: containerRef, dependencies: [product, selectedImg] });
 
-  // Loading state
+  // Show skeleton during loading
   if (isLoading) {
-    return (
-      <div className="w-full min-h-[60vh] flex flex-col items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
-        <p className="text-gray-600">Loading product details...</p>
-      </div>
-    );
+    return <ProductDetailSkeleton />;
   }
 
   // Error or no product found

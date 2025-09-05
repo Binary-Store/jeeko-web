@@ -114,7 +114,7 @@ export default function ContactPage() {
       <div className="max-w-6xl mx-auto mt-4 mb-15 rounded-xl overflow-hidden shadow-lg">
         <iframe
           title="Jeeko Agro Industries Location"
-          src="https://www.google.com/maps?q=GAT+No.+2022%2F5%2C+Ambethan+Bordara+Road%2C+Chakan+Road%2C+Chakan%2C+Pune%2C+Maharashtra%2C+410501&output=embed"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3904.0382621220806!2d70.63602267529136!3d22.259444179715963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959cd0078ebc8eb%3A0xc22087af2a2420dd!2sJEEKO%20AGRITECH%20LLP!5e1!3m2!1sen!2sin!4v1757067033891!5m2!1sen!2sin"
           width="100%"
           height="500"
           style={{ border: 0 }}

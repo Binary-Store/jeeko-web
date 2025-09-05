@@ -281,7 +281,7 @@ export default function ProductsContent() {
                     size="sm"
                   >
                     <a
-                      href={`https://wa.me/919156261648?text=${encodeURIComponent(
+                      href={`https://wa.me/919925232951?text=${encodeURIComponent(
                         `Hello, I'm interested in the ${product.name}. Could you please provide more details?`
                       )}`}
                       target="_blank"

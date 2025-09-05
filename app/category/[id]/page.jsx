@@ -203,7 +203,7 @@ export default function CategoriesDetail() {
                 size="lg"
               >
                 <a
-                  href={`https://wa.me/919156261648?text=${encodeURIComponent(
+                  href={`https://wa.me/919925232951?text=${encodeURIComponent(
                     `Hello, I'm interested in products from the ${category.name} category.`
                   )}`}
                   target="_blank"

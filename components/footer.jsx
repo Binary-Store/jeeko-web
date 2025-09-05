@@ -36,7 +36,7 @@ export default function Footer() {
           </p>
 
           <a
-            href="https://wa.me/919426226165?text=Hello, I would like to inquire about your products."
+            href="https://wa.me/919925232951?text=Hello, I would like to inquire about your products."
             target="_blank"
             rel="noopener noreferrer"
             className="block mt-2"
@@ -51,35 +51,36 @@ export default function Footer() {
         <div className="footer-section">
           <h3 className="text-base sm:text-lg font-semibold text-primary mb-3">Contact Info</h3>
           <Separator className="h-0.5 bg-primary mb-4" />
-          
+
           <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <div className="flex items-center gap-2">
               <span className="bg-primary rounded-xl p-2 flex-shrink-0">
                 <IoCall className="text-white w-4 h-4 sm:w-5 sm:h-5" />
               </span>
-              <span className="text-gray-700 text-xs sm:text-sm">+91 9156261648</span>
+              <span className="text-gray-700 text-xs sm:text-sm">+91 99252 32951</span>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <span className="bg-primary rounded-xl p-2 flex-shrink-0">
                 <IoMdMail className="text-white w-4 h-4 sm:w-5 sm:h-5" />
               </span>
-              <span className="text-gray-700 text-xs sm:text-sm">marketing@jeeko.com</span>
+              <span className="text-gray-700 text-xs sm:text-sm">jeekoagritech@gmail.com</span>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <span className="bg-primary rounded-xl p-2 flex-shrink-0">
                 <FaRegClock className="text-white w-4 h-4 sm:w-5 sm:h-5" />
               </span>
-              <span className="text-gray-700 text-xs sm:text-sm">09:00 AM - 05:00 PM</span>
+              <span className="text-gray-700 text-xs sm:text-sm">09:00 AM - 06:00 PM</span>
             </div>
-            
+
             <div className="flex items-start gap-2">
               <span className="bg-primary rounded-xl p-2 flex-shrink-0 mt-0.5">
                 <FaLocationDot className="text-white w-4 h-4 sm:w-5 sm:h-5" />
               </span>
               <span className="text-gray-700 text-xs sm:text-sm leading-relaxed max-w-xs">
-                GAT No. 2022/5, Ambethan Bordara Road, Chakan Road, Chakan, Pune, Maharashtra, 410501
+                Plot no:-332, Road-R, Gate NO. 2, Phase -1 khirasara GIDC,
+                Tal. Lodhika, Rajkot -360021, Gujarat, India.
               </span>
             </div>
           </div>

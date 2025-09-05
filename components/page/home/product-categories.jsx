@@ -11,7 +11,6 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import { useProductCategories } from "@/hooks/useProductCategories";
 
-// Add custom styles for pagination bullets
 const paginationStyles = `
   .swiper-pagination-bullet {
     background: #dc2626 !important;
@@ -21,7 +20,22 @@ const paginationStyles = `
     background: #dc2626 !important;
     opacity: 1;
   }
+  .swiper-slide {
+    height: auto !important;
+    display: flex !important;
+  }
+  .product-categories-slider .swiper-slide > a {
+    width: 100%;
+    height: 100%;
+  }
+  .product-categories-slider .swiper-slide .bg-white {
+    height: 280px !important; /* Fixed height for all cards */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
 `;
+
 
 // Skeleton Component
 function ProductCategoriesSkeleton() {

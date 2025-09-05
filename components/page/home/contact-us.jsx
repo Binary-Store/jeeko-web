@@ -122,7 +122,7 @@ export default function ContactUs() {
               </div>
               <div className="flex-1">
                 <div className="text-lg sm:text-xl font-bold">Call Us</div>
-                <div className="text-sm sm:text-base">+91 9156261648</div>
+                <div className="text-sm sm:text-base">+91 99252 32951</div>
               </div>
             </div>
 
@@ -132,7 +132,7 @@ export default function ContactUs() {
               </div>
               <div className="flex-1">
                 <div className="text-lg sm:text-xl font-bold">Operational</div>
-                <div className="text-sm sm:text-base">09:00 AM - 05:00 PM</div>
+                <div className="text-sm sm:text-base">09:00 AM - 06:00 PM</div>
               </div>
             </div>
 
@@ -142,7 +142,7 @@ export default function ContactUs() {
               </div>
               <div className="flex-1">
                 <div className="text-lg sm:text-xl font-bold">Email</div>
-                <div className="text-sm sm:text-base">marketing@jeeko.com</div>
+                <div className="text-sm sm:text-base">jeekoagritech@gmail.com</div>
               </div>
             </div>
 
@@ -153,8 +153,8 @@ export default function ContactUs() {
               <div className="flex-1">
                 <div className="text-lg sm:text-xl font-bold">Location</div>
                 <div className="text-sm sm:text-base">
-                  GAT No. 2022/5, Ambethan Bordara Road, Chakan Road, Chakan, Pune, Maharashtra,
-                  410501
+                  Plot no:-332, Road-R, Gate NO. 2, Phase -1 khirasara GIDC,<br />
+                  Tal. Lodhika, Rajkot -360021, Gujarat, India.
                 </div>
               </div>
             </div>
@@ -205,10 +205,9 @@ export default function ContactUs() {
                   placeholder="Enter your full name"
                   className={`
                     w-full transition-all duration-200
-                    ${
-                      errors.fullname
-                        ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500"
-                        : "focus:border-primary focus:ring-primary"
+                    ${errors.fullname
+                      ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500"
+                      : "focus:border-primary focus:ring-primary"
                     }
                   `}
                   maxLength={100}
@@ -234,10 +233,9 @@ export default function ContactUs() {
                   placeholder="Enter your phone number"
                   className={`
                     w-full transition-all duration-200
-                    ${
-                      errors.phonenumber
-                        ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500"
-                        : "focus:border-primary focus:ring-primary"
+                    ${errors.phonenumber
+                      ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500"
+                      : "focus:border-primary focus:ring-primary"
                     }
                   `}
                   maxLength={20}
@@ -263,10 +261,9 @@ export default function ContactUs() {
                   placeholder="Enter your email address"
                   className={`
                     w-full transition-all duration-200
-                    ${
-                      errors.email
-                        ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500"
-                        : "focus:border-primary focus:ring-primary"
+                    ${errors.email
+                      ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500"
+                      : "focus:border-primary focus:ring-primary"
                     }
                   `}
                   maxLength={100}
@@ -292,10 +289,9 @@ export default function ContactUs() {
                   placeholder="Enter the subject of your inquiry"
                   className={`
                     w-full transition-all duration-200
-                    ${
-                      errors.subject
-                        ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500"
-                        : "focus:border-primary focus:ring-primary"
+                    ${errors.subject
+                      ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500"
+                      : "focus:border-primary focus:ring-primary"
                     }
                   `}
                   maxLength={150}
@@ -325,10 +321,9 @@ export default function ContactUs() {
                   placeholder="Tell us more about your inquiry. Please provide as much detail as possible so we can assist you better."
                   className={`
                     w-full min-h-[120px] transition-all duration-200 resize-none
-                    ${
-                      errors.description
-                        ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500"
-                        : "focus:border-primary focus:ring-primary"
+                    ${errors.description
+                      ? "border-red-300 bg-red-50 focus:border-red-500 focus:ring-red-500"
+                      : "focus:border-primary focus:ring-primary"
                     }
                   `}
                   rows={5}

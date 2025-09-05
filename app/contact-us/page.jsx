@@ -168,7 +168,7 @@ export default function ContactPage() {
             </div>
             <div>
               <div className="text-lg font-bold">Call Us</div>
-              <div className="text-gray-600">+91 9156261648</div>
+              <div className="text-gray-600">+91 99252 32951</div>
               <div className="text-xs text-gray-500 mt-1">Available during business hours</div>
             </div>
           </div>
@@ -179,7 +179,7 @@ export default function ContactPage() {
             </div>
             <div>
               <div className="text-lg font-bold">Email</div>
-              <div className="text-gray-600">marketing@jeeko.com</div>
+              <div className="text-gray-600">jeekoagritech@gmail.com</div>
               <div className="text-xs text-gray-500 mt-1">We'll respond within 24 hours</div>
             </div>
           </div>
@@ -202,15 +202,15 @@ export default function ContactPage() {
             <div>
               <div className="text-lg font-bold">Location</div>
               <div className="text-gray-600">
-                GAT No. 2022/5, Ambethan Bordara Road, Chakan Road, Chakan,<br />
-                Pune, Maharashtra, 410501
+               Plot no:-332, Road-R, Gate NO. 2, Phase -1 khirasara GIDC,<br />
+               Tal. Lodhika, Rajkot -360021, Gujarat, India.
               </div>
             </div>
           </div>
 
           {/* WhatsApp Contact Button */}
           <a
-            href="https://wa.me/919156261648?text=Hello, I would like to inquire about your products."
+            href="https://wa.me/919925232951?text=Hello, I would like to inquire about your products."
             target="_blank"
             rel="noopener noreferrer"
             className="block"

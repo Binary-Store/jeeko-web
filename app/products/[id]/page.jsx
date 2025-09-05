@@ -309,7 +309,7 @@ export default function ProductDetail() {
               size="lg"
             >
               <a
-                href={`https://wa.me/919156261648?text=${encodeURIComponent(
+                href={`https://wa.me/919925232951?text=${encodeURIComponent(
                   `Hello, I'm interested in the ${product.name}.`
                 )}`}
                 target="_blank"

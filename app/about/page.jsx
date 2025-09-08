@@ -104,7 +104,7 @@ export default function About() {
   );
 
   return (
-    <section ref={containerRef} className="w-full min-h-[80vh] sm:px-6 lg:px-8 pb-4 sm:pb-8">
+    <section ref={containerRef} className="w-full min-h-[80vh] px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
       <div className="w-full pb-10">
         <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
           {/* Mobile Image */}
@@ -149,7 +149,7 @@ export default function About() {
                   alt={item.title}
                   width={70}
                   height={70}
-                  className="rounded-lg shadow object-contain bg-[#f5f5f5] sm:w-[90px] sm:h-[90px]"
+                  className="rounded-lg shadow object-contain bg-[#f5f5f5] hidden sm:block"
                 />
               </div>
             </div>

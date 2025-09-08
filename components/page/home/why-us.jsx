@@ -2,12 +2,6 @@
 
 import Image from "next/image";
 import { ShieldCheck, Fuel, Headset, ScrollText } from "lucide-react";
-import { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const points = [
   {
@@ -51,147 +45,30 @@ const points = [
 ];
 
 export default function WhyUs() {
-  const containerRef = useRef();
-
-  useGSAP(
-    () => {
-      // Header animation - matching PopularProduct style
-      gsap.fromTo(
-        "h2",
-        {
-          y: 40,
-          opacity: 0,
-          scale: 0.9,
-          rotationX: 10,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          rotationX: 0,
-          duration: 1,
-          ease: "elastic.out(1, 0.5)",
-          scrollTrigger: {
-            trigger: "h2",
-            start: "top 90%",
-            end: "bottom 75%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      // Underline animation - matching PopularProduct style
-      gsap.fromTo(
-        ".underline",
-        {
-          width: 0,
-          opacity: 0,
-        },
-        {
-          width: "8rem",
-          opacity: 1,
-          duration: 1.2,
-          ease: "bounce.out",
-          scrollTrigger: {
-            trigger: ".underline",
-            start: "top 90%",
-            end: "bottom 75%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      // Point cards animation - matching PopularProduct style
-      gsap.fromTo(
-        ".point-card",
-        {
-          y: 60,
-          opacity: 0,
-          scale: 0.85,
-          rotationY: 15,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          rotationY: 0,
-          duration: 0.8,
-          ease: "power4.out",
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: ".point-card",
-            start: "top 85%",
-            end: "bottom 70%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      // Banner image animation - matching PopularProduct style
-      gsap.fromTo(
-        ".banner-image",
-        {
-          y: 60,
-          opacity: 0,
-          scale: 0.9,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: ".banner-image",
-            start: "top 85%",
-            end: "bottom 70%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      // Hover animation for point cards
-      document.querySelectorAll(".point-card").forEach((card) => {
-        const tl = gsap.timeline({ paused: true });
-        tl.to(card, {
-          y: -8,
-          scale: 1.02,
-          boxShadow: "0 12px 24px rgba(0,0,0,0.15)",
-          duration: 0.4,
-          ease: "power3.out",
-        });
-
-        card.addEventListener("mouseenter", () => tl.play());
-        // Removed mouseleave event to prevent reverse animation
-      });
-    },
-    { scope: containerRef }
-  );
-
   return (
-    <section ref={containerRef} className="w-full mx-auto my-10  px-4 sm:px-6 lg:px-8">
+    <section className="w-full mx-auto my-6 sm:my-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold">
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center font-bold">
           Why Choose <span className="text-primary">JEEKO</span>?
         </h2>
-        <div className="w-24 sm:w-32 h-1 bg-primary mx-auto my-2 underline"></div>
+        <div className="w-16 sm:w-24 md:w-32 h-1 bg-primary mx-auto my-2"></div>
 
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 my-8">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 my-6 sm:my-8">
           {/* Points Section */}
-          <div className="space-y-3 sm:space-y-4 w-full lg:w-1/2">
+          <div className="space-y-2 sm:space-y-3 md:space-y-4 w-full lg:w-1/2">
             {points.map((point, index) => (
               <div
                 key={index}
-                className="flex gap-3 sm:gap-4 h-fit items-start sm:items-center p-3 sm:p-4 rounded-xl bg-white point-card shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="flex gap-2 sm:gap-3 md:gap-4 items-start p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl bg-white point-card shadow-sm hover:shadow-md transition-shadow duration-300"
               >
-                <div className="text-primary flex-shrink-0 mt-1 sm:mt-0">
+                <div className="text-primary flex-shrink-0 mt-0.5 sm:mt-1 md:mt-0">
                   {point.icon}
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-sm sm:text-base lg:text-lg">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-xs sm:text-sm md:text-base lg:text-lg leading-tight">
                     {point.title}
                   </h3>
-                  <p className="text-xs sm:text-sm lg:text-base text-muted-foreground mt-1">
+                  <p className="text-xs sm:text-sm md:text-base text-muted-foreground mt-0.5 sm:mt-1 leading-relaxed">
                     {point.description}
                   </p>
                 </div>
@@ -200,15 +77,17 @@ export default function WhyUs() {
           </div>
 
           {/* Banner Image Section */}
-          <div className="w-full lg:w-1/2">
-            <Image
-              className="w-full h-auto rounded-xl banner-image shadow-lg"
-              src="/images/banner.png"
-              alt="Why Choose JEEKO - Quality Products"
-              width={600}
-              height={400}
-              priority
-            />
+          <div className="w-full lg:w-1/2 mt-4 lg:mt-0">
+            <div className="relative w-full aspect-[3/2] sm:aspect-[4/3] lg:aspect-auto lg:h-full">
+              <Image
+                className="rounded-lg sm:rounded-xl banner-image shadow-lg object-cover"
+                src="/images/banner.png"
+                alt="Why Choose JEEKO - Quality Products"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
+                priority
+              />
+            </div>
           </div>
         </div>
       </div>

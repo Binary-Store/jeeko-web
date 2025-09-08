@@ -19,7 +19,7 @@ export const useAuth = () => {
     setIsLoading(false)
   }, [])
 
-  // Login mutation
+  // Login mutation - REMOVED router navigation from here
   const loginMutation = useMutation({
     mutationFn: async (credentials) => {
       // Simulate API delay
@@ -39,7 +39,7 @@ export const useAuth = () => {
       localStorage.setItem(USER_KEY, JSON.stringify(data.user))
       setIsAuthenticated(true)
       queryClient.setQueryData(['auth'], data.user)
-      router.push('/admin/dashboard')
+      // Removed router navigation from here - let the component handle it
     },
     onError: (error) => {
       console.error('Login failed:', error.message)
@@ -70,6 +70,7 @@ export const useAuth = () => {
     isLoading,
     user,
     login: loginMutation.mutate,
+    loginAsync: loginMutation.mutateAsync, // Added async version
     loginLoading: loginMutation.isPending,
     loginError: loginMutation.error,
     logout,

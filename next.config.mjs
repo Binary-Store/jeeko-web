@@ -4,7 +4,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'ullas-pcpl.s3.ap-south-1.amazonaws.com', // Your S3 bucket hostname
+        hostname: 'jeeko-prod.s3.ap-south-1.amazonaws.com', // Your S3 bucket hostname
+        port: '',
+        pathname: '/**',
+      },
+       {
+        protocol: 'https',
+        hostname: '*.amazonaws.com',
         port: '',
         pathname: '/**',
       },

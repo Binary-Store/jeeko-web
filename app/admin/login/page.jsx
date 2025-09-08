@@ -12,14 +12,14 @@ import logo from '@/public/images/logo.svg'
 
 export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false)
-  const { login, loginLoading, loginError, isAuthenticated } = useAuth()
+  const { loginAsync, loginLoading, loginError, isAuthenticated } = useAuth()
   const router = useRouter()
 
-  // Redirect if already authenticated
+  // Redirect if already authenticated with improved handling
   useEffect(() => {
     if (isAuthenticated) {
-      router.push('/admin/dashboard')
-      router.refresh()
+      // Use replace to avoid back button issues
+      router.replace('/admin/dashboard')
     }
   }, [isAuthenticated, router])
 
@@ -37,7 +37,17 @@ export default function AdminLoginPage() {
 
   const onSubmit = async (data) => {
     try {
-      await login(data)
+      // Use the async version to wait for completion
+      await loginAsync(data)
+      
+      // Navigation will happen automatically via useEffect when isAuthenticated changes
+      // But we can also add a manual fallback
+      setTimeout(() => {
+        if (window.location.pathname === '/admin/login') {
+          router.replace('/admin/dashboard')
+        }
+      }, 100)
+      
     } catch (error) {
       console.error('Login error:', error)
     }
@@ -156,7 +166,6 @@ export default function AdminLoginPage() {
                 </div>
               </div>
             )}
-
 
             {/* Submit Button */}
             <button

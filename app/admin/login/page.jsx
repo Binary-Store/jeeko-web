@@ -19,6 +19,7 @@ export default function AdminLoginPage() {
   useEffect(() => {
     if (isAuthenticated) {
       router.push('/admin/dashboard')
+      router.refresh()
     }
   }, [isAuthenticated, router])
 

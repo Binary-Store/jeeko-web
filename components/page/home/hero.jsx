@@ -22,15 +22,15 @@ gsap.registerPlugin(ScrollTrigger, TextPlugin);
 const banner = [
   {
     image: "/images/banners/banner-1-sm.webp",
-    image_md: "/images/banners/banner_1.png",
+    image_md: "/images/banners/4.svg",
   },
   {
     image: "/images/banners/banner-2-sm.webp",
-    image_md: "/images/banners/banner_2.png",
+    image_md: "/images/banners/5.svg",
   },
   {
     image: "/images/banners/banner-3-sm.webp",
-    image_md: "/images/banners/banner_3.png",
+    image_md: "/images/banners/6.svg",
   },
 ];
 
@@ -115,7 +115,9 @@ export default function Hero() {
                       width={1980}
                       height={709}
                       className="w-full rounded-xl object-contain hidden md:block"
-                      priority
+                      priority={index === 0}
+                      quality={100}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>
                 </CarouselItem>

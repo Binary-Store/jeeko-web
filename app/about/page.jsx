@@ -10,7 +10,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaSeedling, FaHandsHelping, FaAward, FaLeaf } from "react-icons/fa";
-import banner from "@/public/images/banners/about.png"
 import banner_mb from "@/public/images/banners/about_mb.png"
 
 gsap.registerPlugin(ScrollTrigger);
@@ -19,26 +18,22 @@ const timeline = [
   {
     year: "2010",
     title: "Founded",
-    desc: "Jeeko Agro Industries is born with a vision to empower Indian farmers with modern, reliable tools.",
-    image: "/images/bg-doodle.png",
+    desc: "Jeeko Agro Industries is born with a vision to empower Indian farmers with modern, reliable tools."
   },
   {
     year: "2014",
     title: "First Breakthrough",
-    desc: "Launched our first tiller, quickly becoming a trusted name in the region.",
-    image: "/images/category/tiller.png",
+    desc: "Launched our first tiller, quickly becoming a trusted name in the region."
   },
   {
     year: "2018",
     title: "Expanding Horizons",
     desc: "Introduced generators and pumps, expanding our product range and reach.",
-    image: "/images/category/generator.jpg",
   },
   {
     year: "2023",
     title: "Innovation & Growth",
-    desc: "Invested in R&D, launched new eco-friendly products, and grew our support network nationwide.",
-    image: "/images/category/grass-cutter.png",
+    desc: "Invested in R&D, launched new eco-friendly products, and grew our support network nationwide."
   },
 ];
 
@@ -113,18 +108,21 @@ export default function About() {
             alt="About Banner Mobile"
             width={1980}
             height={709}
+            quality={95}
             className="block md:hidden w-full h-auto max-h-[89vh] sm:max-h-[70vh] rounded-2xl object-contain"
             priority
           />
 
           {/* Desktop Image */}
           <Image
-            src={banner}
+            src="/images/banners/1.svg"
             alt="About Banner Desktop"
             width={1980}
             height={709}
+            quality={100}
             className="hidden md:block w-full h-auto max-h-[70vh] lg:max-h-[96vh] rounded-2xl object-contain"
             priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
       </div>
@@ -143,15 +141,6 @@ export default function About() {
                 </div>
                 <p className="text-gray-600 text-sm sm:text-base">{item.desc}</p>
               </Card>
-              <div className="flex-shrink-0">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  width={70}
-                  height={70}
-                  className="rounded-lg shadow object-contain bg-[#f5f5f5] hidden sm:block"
-                />
-              </div>
             </div>
           ))}
         </div>

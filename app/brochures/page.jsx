@@ -6,7 +6,6 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useRef } from "react";
 import banner from "@/public/images/banners/brochures.png";
-import banner_md from "@/public/images/banners/brochures_md.png";
 
 const brochures = [
   {
@@ -49,12 +48,14 @@ export default function BrochuresPage() {
 
           {/* Desktop Image */}
           <Image
-            src={banner_md}
+            src="/images/banners/3.svg"
             alt="Brochures Banner Desktop"
             width={1980}
             height={709}
+            quality={100}
             className="hidden md:block w-full h-auto max-h-[70vh] lg:max-h-[96vh] rounded-2xl object-contain"
             priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
       </div>

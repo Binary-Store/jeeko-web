@@ -10,8 +10,7 @@ import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
 import { useProducts } from "@/hooks/useProducts";
 import { useProductCategories } from "@/hooks/useProductCategories";
-import banner from "@/public/images/banners/allproduct.png";
-import banner_md from "@/public/images/banners/allProduct_md.png";
+// Removed banner image imports - using custom banner instead
 
 export default function ProductsContent() {
   const containerRef = useRef();
@@ -71,9 +70,24 @@ export default function ProductsContent() {
   if (isLoading) {
     return (
       <section className="w-full mx-auto">
-        {/* Hero Banner - Loading State */}
+        {/* Custom Banner - Loading State */}
         <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
-          <div className="max-w-7xl rounded-2xl bg-gray-200 animate-pulse mx-auto overflow-hidden shadow-lg h-[50vh] sm:h-[60vh] lg:h-[70vh]">
+          <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
+            <div className="relative w-full min-h-[50vh] sm:min-h-[60vh] lg:min-h-[70vh] flex flex-col lg:flex-row">
+              {/* Left Section - Loading */}
+              <div className="flex-1 bg-white p-6 sm:p-8 lg:p-12 flex flex-col justify-center animate-pulse">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-200 rounded-full mb-4 sm:mb-6"></div>
+                <div className="h-8 sm:h-12 lg:h-16 bg-gray-200 rounded mb-2 sm:mb-4 w-3/4"></div>
+                <div className="h-1 bg-gray-200 rounded mb-4 sm:mb-6 w-1/4"></div>
+                <div className="space-y-2">
+                  <div className="h-4 bg-gray-200 rounded w-full"></div>
+                  <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                  <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+                </div>
+              </div>
+              {/* Right Section - Loading */}
+              <div className="flex-1 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse"></div>
+            </div>
           </div>
         </div>
         
@@ -89,28 +103,38 @@ export default function ProductsContent() {
   if (error) {
     return (
       <section className="w-full mx-auto">
-        {/* Hero Banner - Error State */}
+        {/* Custom Banner - Error State */}
         <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
           <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
-            {/* Mobile Image */}
-            <Image
-              src={banner_md}
-              alt="All Products Banner Mobile"
-              width={1980}
-              height={709}
-              className="block md:hidden w-full h-auto max-h-[50vh] sm:max-h-[60vh] rounded-2xl object-contain"
-              priority
-            />
+            {/* Mobile Banner Image */}
+            <div className="block md:hidden">
+              <Image
+                src="/images/banners/allproduct.png"
+                alt="All Products Banner Mobile"
+                width={1980}
+                height={709}
+                className="w-full h-auto max-h-[60vh] rounded-2xl object-contain"
+                priority
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              />
+            </div>
 
-            {/* Desktop Image */}
-            <Image
-              src={banner}
-              alt="All Products Banner Desktop"
-              width={1980}
-              height={709}
-              className="hidden md:block w-full h-auto max-h-[60vh] lg:max-h-[70vh] rounded-2xl object-contain"
-              priority
-            />
+            {/* Desktop SVG Banner */}
+            <div className="hidden md:block">
+              <Image
+                src="/images/banners/2.svg"
+                alt="All Products Banner Desktop"
+                width={1980}
+                height={709}
+                className="w-full h-auto max-h-[70vh] lg:max-h-[80vh] rounded-2xl object-contain"
+                priority
+                quality={100}
+                sizes="(max-width: 1024px) 100vw, 100vw"
+              />
+            </div>
           </div>
         </div>
         
@@ -142,35 +166,45 @@ export default function ProductsContent() {
   if (!products.length) {
     return (
       <section className="w-full mx-auto">
-        {/* Hero Banner - No Products State */}
+        {/* Custom Banner - No Products State */}
         <div className="w-full px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
           <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
-            {/* Mobile Image */}
-            <Image
-              src={banner_md}
-              alt="All Products Banner Mobile"
-              width={1980}
-              height={709}
-              className="block md:hidden w-full h-auto max-h-[50vh] sm:max-h-[60vh] rounded-2xl object-contain"
-              priority
-            />
+            {/* Mobile Banner Image */}
+            <div className="block md:hidden">
+              <Image
+                src="/images/banners/allproduct.png"
+                alt="All Products Banner Mobile"
+                width={1980}
+                height={709}
+                className="w-full h-auto max-h-[60vh] rounded-2xl object-contain"
+                priority
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              />
+            </div>
 
-            {/* Desktop Image */}
-            <Image
-              src={banner}
-              alt="All Products Banner Desktop"
-              width={1980}
-              height={709}
-              className="hidden md:block w-full h-auto max-h-[60vh] lg:max-h-[70vh] rounded-2xl object-contain"
-              priority
-            />
+            {/* Desktop SVG Banner */}
+            <div className="hidden md:block">
+              <Image
+                src="/images/banners/2.svg"
+                alt="All Products Banner Desktop"
+                width={1980}
+                height={709}
+                className="w-full h-auto max-h-[70vh] lg:max-h-[80vh] rounded-2xl object-contain"
+                priority
+                quality={100}
+                sizes="(max-width: 1024px) 100vw, 100vw"
+              />
+            </div>
           </div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold">No Products Available</h2>
           <div className="w-24 sm:w-32 h-1 bg-primary mx-auto my-4"></div>
-          <div className="text-center mt-12 bg-gray-50 border border-gray-200 rounded-xl p-8 max-w-md mx-auto">
+          <div className="text-center mt-12 bg-white border border-gray-200 rounded-xl p-8 max-w-md mx-auto">
             <p className="text-gray-600 mb-4">No products available at the moment</p>
             <p className="text-sm text-gray-500">Please check back later or contact us for more information</p>
           </div>
@@ -180,29 +214,39 @@ export default function ProductsContent() {
   }
 
   return (
-    <section ref={containerRef} className="w-full min-h-[80vh]  px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
-      {/* Hero Banner Section - Same pattern as About page */}
+    <section ref={containerRef} className="w-full min-h-[80vh] px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8">
+      {/* Custom Hero Banner Section */}
       <div className="w-full pb-10">
         <div className="max-w-7xl rounded-2xl bg-white mx-auto overflow-hidden shadow-lg">
-          {/* Mobile Image */}
-          <Image
-            src={banner}
-            alt="All Products Banner Mobile"
-            width={1980}
-            height={709}
-            className="block md:hidden w-full h-auto max-h-[89vh] sm:max-h-[70vh] rounded-2xl object-contain"
-            priority
-          />
+          {/* Mobile Banner Image */}
+          <div className="block md:hidden">
+            <Image
+              src="/images/banners/allproduct.png"
+              alt="All Products Banner Mobile"
+              width={1980}
+              height={709}
+              className="w-full h-auto max-h-[60vh] rounded-2xl object-contain"
+              priority
+              quality={95}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+            />
+          </div>
 
-          {/* Desktop Image */}
-          <Image
-            src={banner_md}
-            alt="All Products Banner Desktop"
-            width={1980}
-            height={709}
-            className="hidden md:block w-full h-auto max-h-[70vh] lg:max-h-[96vh] rounded-2xl object-contain"
-            priority
-          />
+          {/* Desktop SVG Banner */}
+          <div className="hidden md:block">
+            <Image
+              src="/images/banners/2.svg"
+              alt="All Products Banner Desktop"
+              width={1980}
+              height={709}
+              className="w-full h-auto max-h-[70vh] lg:max-h-[80vh] rounded-2xl object-contain"
+              priority
+              quality={100}
+              sizes="(max-width: 1024px) 100vw, 100vw"
+            />
+          </div>
         </div>
       </div>
 
@@ -248,7 +292,7 @@ export default function ProductsContent() {
               >
                 <CardContent className="p-4 sm:p-6">
                   <Link href={`/products/${product._id}`} className="block group focus:outline-none">
-                    <div className="relative w-full h-40 sm:h-48 mb-3 sm:mb-4 bg-gray-50 rounded-lg flex items-center justify-center overflow-hidden">
+                    <div className="relative w-full h-40 sm:h-48 mb-3 sm:mb-4 bg-white rounded-lg flex items-center justify-center overflow-hidden">
                       <Image
                         className="object-contain group-hover:scale-105 transition-transform duration-300 p-2"
                         src={product.images?.[0]?.url || "/images/placeholder-product.png"}
@@ -277,7 +321,7 @@ export default function ProductsContent() {
                   </Link>
                   <Button
                     asChild
-                    className="mt-4 w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white flex items-center gap-2"
+                    className="mt-4 w-full bg-white text-white flex items-center gap-2"
                     size="sm"
                   >
                     <a
@@ -296,7 +340,7 @@ export default function ProductsContent() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-gray-50 rounded-xl">
+          <div className="text-center py-12 bg-white rounded-xl">
             <p className="text-gray-600 text-lg mb-2">No products found</p>
             <p className="text-gray-500 text-sm mb-4">
               No products match the selected category filter
